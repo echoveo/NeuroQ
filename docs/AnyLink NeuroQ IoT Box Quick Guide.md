@@ -2,41 +2,53 @@
 
 **AnyLink NeuroQ IoT Box Quick Guide**
 
+# 1. Connect to IoT box
 
+Connect to IoT box via steps described in section 1.1 or 1.2.
 
-# 1. Connect to IoT box via LAN port
+## 1.1 via WiFi Hotspot
+**Step 1:** Plug power supply to IoT box to power on
+
+**Step 2:** Plug AnyLink USB drive into one of the USB1 on IoT Box
+
+**Step 3:** Connect your computer to IoT box WiFi Hotspot with SSID/Password specified on your USB drive
+
+## 1.2 via LAN port
 
 **Step 1** : Connect your PC to LAN port on IoT box using ethernet cable  
-<img src="https://www.anylinkiot.com/doc/NeuroQ-F.JPEG" width = "80" height = "343" alt="" align=center />  
+<img src="https://www.anylinkiot.com/doc/NeuroQ-F.JPEG" width = "80" height = "343" alt="" align="center" />  
 
 **Step 2:** Plug power supply to IoT box to power on
 
-**Step 3** : Open **http://192.168.101.204** in your browser and enter username and password (default is **admin/admin** )
 
-**Step 4** : Click **Advanced-\&gt;Agent Config** to configure AnyLink Cloud address in **MQTT Publish** and **MQTT Subscription section** and click **Save** button at the bottom once finished.  
+# 2. Configure network connection to AnyLink Cloud
+**Step 1** : Open **http://192.168.101.204** in your browser and enter username and password (default is **admin/admin** )
+
+**Step 2** : Click **Advanced-\&gt;Agent Config** to configure AnyLink Cloud address in **MQTT Publish** and **MQTT Subscription section** and click **Save** button at the bottom once finished.  
 <img src="https://www.anylinkiot.com/doc/neuroq-ui1.png" width = "440" height = "250" alt="" align=center />
 
-**Step 5** : Click **Advanced-\&gt;Network Config** to configure your network connection to AnyLink Cloud. Select **Ethernet** if you use **WAN** port on IoT box to connect to AnyLink Cloud, or select **WiFi** if you use WiFi to connect to AnyLink Cloud. If network connection is correct, the upper right corner **Cloud Connection** status will be displayed as **Connected**.  
+**Step 3** : Click **Advanced-\&gt;Network Config** to configure your network connection to AnyLink Cloud. Select **Ethernet** if you use **WAN** port on IoT box to connect to AnyLink Cloud, or select **WiFi** if you use WiFi to connect to AnyLink Cloud. If network connection is correct, the upper right corner **Cloud Connection** status will be displayed as **Connected**.  
 <img src="https://www.anylinkiot.com/doc/neuroq-ui2.png" width = "440" height = "250" alt="" align=center />
 
-**Step 6:** Login to AnyLink Cloud to make sure your IoT box is registered in the Cloud. You can find serial number of the IoT box on the back side of the box.  
+**Step 4:** Login to AnyLink Cloud to make sure your IoT box is registered in the Cloud. You can find serial number of the IoT box on the back side of the box.  
 <img src="https://www.anylinkiot.com/doc/NeuroQ-B.JPEG" width = "80" height = "343" alt="" align=center />  
-# 2. Configure IoT box to communicate with instrument
+
+# 3. Configure IoT box to communicate with instrument
 
 Once you connect your IoT box to the AnyLink Cloud, you can deploy configuration file from AnyLink Cloud to IoT box via rest API.
 
-## 2.1 Sequence diagram
+## 3.1 Sequence diagram
 
 <img src="https://www.anylinkiot.com/doc/neuroq-seq.png" width = "400" height = "175" alt="" align=center />
 
-## 2.2 Process description
+## 3.2 Process description
 
 1. Use the API /remoteAgent/sendAnylinkXML (**please refer   [AnyLink Cloud REST API](https://anylinkiot.com/doc/AnylinkCloud%20RestAPI.md) for details**) to send the xml configuration file to anylink
 2. After anylink receives the xml configuration file, it needs to restart to load the new configuration
 3. After anylink restarts, it will reregister to Anylink cloud
 4. Call the interface /agent/register (**please refer   [AnyLink Cloud REST API](https://anylinkiot.com/doc/AnylinkCloud%20RestAPI.md) for details**) for details) to query the registration result of anylink. If anylink is reregistered successfully, it means the xml file be sent successfully and the whole process will end.
 
-## 2.3 Sample code (JAVA)
+## 3.3 Sample code (JAVA)
 
 ```java
 private final String BASE_URL = "http://staging.anylink.io:8600";
