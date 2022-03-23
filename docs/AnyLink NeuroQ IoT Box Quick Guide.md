@@ -2,6 +2,9 @@
 
 **AnyLink NeuroQ IoT Box Quick Guide**
 
+Version 3.0.1
+March 23th, 2022
+
 # 1. Connect to IoT box
 
 Connect to IoT box via steps described in section 1.1 or 1.2.
