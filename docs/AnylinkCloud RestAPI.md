@@ -1,6 +1,11 @@
 ![logo2](https://user-images.githubusercontent.com/76909130/153789287-58f516ff-ed97-45cc-8d8c-426956d27f84.png)
 
-AnylinkCloud RestAPI
+# AnylinkCloud RestAPI
+
+
+Version 4.2.9<br>
+March 21th, 2022
+
 
 The token authentication of the following APIs adds support for `Authorization: Bearer [token]` in http/https request header. At the same time, it also continues to support the way of carrying tokens in the request body. If both the request body and the header contain a token, the one in the header shall prevail.
 
@@ -13,14 +18,6 @@ The following image shows how to add a `Authorization: Bearer [token]` in the he
 
 
 ## 1. Get token for AnylinkCloud UI
-
-This token is for the following APIs only, for all other APIs, please use **[2. Get token for AnylinkCloud API](https://github.com/tetrascience/ts-anylink-shared/blob/master/Documents/API%20Instructions/AnylinkCloud%20RestAPI.md#2-get-token-for-anylinkcloud-api)** instead :  
-- [1.  Modifying AnyLink Cloud user password](https://github.com/tetrascience/ts-anylink-shared/blob/master/Documents/API%20Instructions/AnylinkCloud%20RestAPI.md#3-change-anylinkcloud-api-password)
-- [21. Get device list of a user](https://github.com/tetrascience/ts-anylink-shared/blob/master/Documents/API%20Instructions/AnylinkCloud%20RestAPI.md#21-get-device-list-of-a-user)  
-- [22. Associate devices to a user](https://github.com/tetrascience/ts-anylink-shared/blob/master/Documents/API%20Instructions/AnylinkCloud%20RestAPI.md#22-associate-devices-to-a-user)  
-- [23. Remove device from user](https://github.com/tetrascience/ts-anylink-shared/blob/master/Documents/API%20Instructions/AnylinkCloud%20RestAPI.md#23-remove-device-from-user)    
-
-In AnyLink Cloud, there're two type of users, one is tenant user, which is used to login into the AnyLink cloud system via web UI, the other is API user, which is used to make API calls into AnyLink Cloud. And the user name here is tenant user name not AnyLink Cloud API user name.
 
 The token is valid for 10 hours. After the timeout, you need to obtain a new token.
 
@@ -65,49 +62,10 @@ Sample response:
 }
 ```
 
-## 2. Get token for AnylinkCloud API
-
-Function: This token is used to call Anylink Cloud APIs.
-The token is valid for 10 hours. After the timeout, you need to obtain a new token.
-
-Request type: POST
-
-url: /user/login
-
-Parameters:
-
-| Parameters | Type   | Required | Comment                       |
-| ---------- | ------ | -------- | ----------------------------- |
-| name       | String | yes      | AnyLink cloud API User name   |
-| hash       | String | yes      | hash code. Use ‘tetrascience’ |
-| password   | String | yes      | AnyLink cloud API password    |
-
-```
-{
-    "name": "apiuser",
-    "password": "123456",
-    "hash": "tetrascience"
-}
-```
-
-Return value: JSON
-
-| Parameters | Type   | Comment                                                      |
-| ---------- | ------ | ------------------------------------------------------------ |
-| status     | String | return code: <br>**100**: successful<br>**103**: parameter error <br>**107**: There will be the following two situations: <br/>       username or password is error <br>       username does not exist<br>**111**: For some other errors, refer to the "msg" value. |
-| msg        | String | error message                                                |
-| data       | String | token                                                        |
-
-```
-{
-    "status": "100",
-    "data":"dc91c34b-6a11-437a-ab8e-fa6fdc3e547b"
-}
-```
 
 ## 3. Change AnylinkCloud API password
 
-Function: Change the password for AnylinkCloud API user（The token can be obtained through the interface **'/user/login'** of AnylinkCloudAPI）.
+Function: Change the password for AnylinkCloud API user.
 
 Request type: PUT
 
@@ -117,7 +75,7 @@ Parameters:
 
 | Parameters | Type   | Required | Comment                                                    |
 | ---------- | ------ | -------- | ---------------------------------------------------------- |
-| token      | String | yes      | User token, this token is obtained through **/user/login** |
+| token      | String | yes      | User token |
 | hash       | String | yes      | hash code                                                  |
 | password   | String | yes      | new password                                               |
 
@@ -188,7 +146,7 @@ Parameters: JSON
 
 | Parameters   | Sub Parameters | Type    | Required | Comment                                                      |
 | ------------ | -------------- | ------- | -------- | ------------------------------------------------------------ |
-| token        |                | String  | yes      | User token. Both types of tokens are available               |
+| token        |                | String  | yes      | User token              |
 | hash         |                | String  | yes      | hash is not used for now（use ‘tetrascience’ as example and null is OK too） |
 | serialNumber |                | Integer | yes      | AnyLink box serial number                                    |
 | deviceId     |                | Integer | yes      | Anylink cloud device id. This value must be configured with libTetraSerialCmd driver. |
@@ -313,7 +271,7 @@ Parameters:
 
 | Parameters   | Type    | Required | Comment                                        |
 | ------------ | ------- | -------- | ---------------------------------------------- |
-| token        | String  | yes      | User token. Both types of tokens are available |
+| token        | String  | yes      | User token |
 | serialNumber | Integer | yes      | AnyLink box serial number                      |
 
 Response: JSON
@@ -436,7 +394,7 @@ Parameters:
 
 | Parameters   | Type    | Required | Comment                                                      |
 | ------------ | ------- | -------- | ------------------------------------------------------------ |
-| token        | String  | yes      | User token. Both types of tokens are available               |
+| token        | String  | yes      | User token            |
 | hash         | String  | yes      | hash（use ‘tetrascience’）                                   |
 | filetype     | String  | yes      | Type of file to upload: anylink_xml(for WIFI config), idinfo_xml alldevicedriver_xml, config_xml |
 | serialnumber | Integer | yes      | AnyLink box serial number                                    |
@@ -477,7 +435,7 @@ Parameters:
 
 | Parameters | Type   | Require | Comment                                                      |
 | ---------- | ------ | ------- | ------------------------------------------------------------ |
-| token      | String | yes     | User token. Both types of tokens are available               |
+| token      | String | yes     | User token              |
 | hash       | String | yes     | hash（use ‘tetrascience’）                                   |
 | sign       | String | yes     | Get the result for the command，this is the data value from API "/remoteAgent/uploadCmd" |
 
@@ -508,7 +466,7 @@ Parameters: JSON
 
 | Parameters   | Value   | Required | Comments                                                 |
 | ------------ | ------- | -------- | -------------------------------------------------------- |
-| token        | String  | yes      | User token. Both types of tokens are available           |
+| token        | String  | yes      | User token         |
 | hash         | String  | yes      | hash（use ‘tetrascience’）                               |
 | xmlType      | String  | yes      | XML file type： anylink_xml(for WIFI config), config_xml |
 | serialNumber | Integer | yes      | AnyLink box serial number                                |
@@ -542,7 +500,7 @@ Parameters:
 
 | Parameters   | Value   | Required | Comments                                                     |
 | ------------ | ------- | -------- | ------------------------------------------------------------ |
-| token        | String  | yes      | User token. Both types of tokens are available               |
+| token        | String  | yes      | User token        |
 | hash         | String  | yes      | hash（use ‘tetrascience’）                                   |
 | filetype     | String  | yes      | XML file type： anylink_xml(for WIFI config), config_xml (ModuleConfig.xml for agent)    |
 | serialnumber | Integer | yes      | AnyLink box serial number                                    |
@@ -854,7 +812,7 @@ Prameters: JSON
 
 | Parameters   | Type    | Required | Comment                                                |
 | ------------ | ------- | -------- | ------------------------------------------------------ |
-| token        | String  | yes      | User token. Both types of tokens are available         |
+| token        | String  | yes      | User token        |
 | serialNumber | Integer | yes      | AnyLink box serial number                              |
 | registerID   | Long    | yes      | The value is the data from /remoteAgent/sendAnylinkXML |
 
@@ -877,7 +835,7 @@ Prameters: form-data
 
 | Parameters | Type   | Required | Comment                                                      |
 | ---------- | ------ | -------- | ------------------------------------------------------------ |
-| token      | String | yes      | User token. Both types of tokens are available               |
+| token      | String | yes      | User token              |
 | oldVersion | String | yes      | The agent version for which the upgrade package is applicable. Multiple version numbers are separated by commas, e.g. "3.7.0,3.7.1". |
 | newVersion | String | yes      | Upgraded version                                             |
 | fileName   | String | yes      | File name of upgrade file                                    |
@@ -902,7 +860,7 @@ Prameters: form-data
 
 | Parameters    | Type   | Required | Comment                                                      |
 | ------------- | ------ | -------- | ------------------------------------------------------------ |
-| token         | String | Yes      | User token. Both types of tokens are available               |
+| token         | String | Yes      | User token               |
 | agentVersion  | String | Yes      | The agent version for which the upgrade package is applicable. Multiple version numbers are separated by commas, e.g. "3.7.0,3.7.1". You can also fill in the version range, separated by "-", e.g. "3.0.1-3.2.0". |
 | driverName    | String | Yes      | Driver name                                                  |
 | driverVersion | String | Yes      | Driver version                                               |
@@ -931,7 +889,7 @@ Prameters:
 
 | Parameters    | Type    | Required | Comment                                                      |
 | ------------- | ------- | -------- | ------------------------------------------------------------ |
-| token         | String  | Yes      | User token. Both types of tokens are available               |
+| token         | String  | Yes      | User token            |
 | page          | Integer | No       | Page number, starting from 1. Default value is "1"           |
 | perPage       | Integer | No       | Number of data per page. Default value is "10"               |
 | driverVersion | String  | No       | Driver version                                               |
@@ -974,7 +932,7 @@ Prameters:
 
 | Parameters | Type   | Required | Comment                                        |
 | ---------- | ------ | -------- | ---------------------------------------------- |
-| token      | String | Yes      | User token. Both types of tokens are available |
+| token      | String | Yes      | User token |
 | id         | String | Yes      |                                                |
 
 Response JSON:
@@ -1000,7 +958,7 @@ Prameters:
 
 | Parameters | Type      | Required | Comment                                        |
 | ---------- | --------- | -------- | ---------------------------------------------- |
-| token      | String    | Yes      | User token. Both types of tokens are available |
+| token      | String    | Yes      | User token |
 | agentIds   | JSONArray | Yes      | An Array of IoT boxes' Serial Numbers          |
 
 Sample request:
@@ -1051,7 +1009,7 @@ Prameters:
 
 | Parameters | Type   | Required | Comment                                        |
 | ---------- | ------ | -------- | ---------------------------------------------- |
-| token      | String | Yes      | User token. Both types of tokens are available |
+| token      | String | Yes      | User token |
 
 Response JSON:
 
@@ -1094,7 +1052,7 @@ Prameters:
 
 | Parameters   | Type    | Required | Comment                                        |
 | ------------ | ------- | -------- | ---------------------------------------------- |
-| token        | String  | Yes      | User token. Both types of tokens are available |
+| token        | String  | Yes      | User token  |
 | serialNumber | Integer | Yes      |                                                |
 
 Response JSON:
@@ -1124,11 +1082,6 @@ Response JSON:
 
 # The following are `device-user` related API (21, 22, 23)
 
-You should use [1. Get token for AnylinkCloud UI](https://github.com/tetrascience/ts-anylink-shared/edit/master/Documents/API%20Instructions/AnylinkCloud%20RestAPI.md#1-get-token-for-anylinkcloud-ui) to get the token when call the following APIs:
-
-- [21. Get device list of a user](https://github.com/tetrascience/ts-anylink-shared/edit/master/Documents/API%20Instructions/AnylinkCloud%20RestAPI.md#21-get-device-list-of-a-user)
-- [22. Associate devices to a user](https://github.com/tetrascience/ts-anylink-shared/edit/master/Documents/API%20Instructions/AnylinkCloud%20RestAPI.md#22-associate-devices-to-a-user)
-- [23. Remove device from user](https://github.com/tetrascience/ts-anylink-shared/edit/master/Documents/API%20Instructions/AnylinkCloud%20RestAPI.md#23-remove-device-from-user)
 
 ## 21. Get device list of a user
 
@@ -1142,7 +1095,7 @@ You should use [1. Get token for AnylinkCloud UI](https://github.com/tetrascienc
 
 | Parameters   | Type    | Required | Comment                                                      |
 | ------------ | ------- | -------- | ------------------------------------------------------------ |
-| token        | String  | Yes      | User token (AnylinkCloud UI token)                           |
+| token        | String  | Yes      | User token                    |
 | userId       | Integer | No       | The `userId` to get the device list. If `userId` is null, it will be the id of the user corresponding to the `token`. |
 | serialNumber | Integer | No       | Anylink serial number                                        |
 | deviceName   | String  | No       | device name                                                  |
@@ -1190,7 +1143,7 @@ You should use [1. Get token for AnylinkCloud UI](https://github.com/tetrascienc
 
 | Parameters | Type    | Required | Comment                                                      |
 | ---------- | ------- | -------- | ------------------------------------------------------------ |
-| token      | String  | Yes      | User token (AnylinkCloud UI token)                           |
+| token      | String  | Yes      | User token                  |
 | userId     | Integer | Yes      | The `userId` to bind the device list.                        |
 | deviceIds  | String  | Yes      | AnylinkCloud device id. Multiple values are separated by commas. |
 
@@ -1221,7 +1174,7 @@ Function: Remove device from a user
 
 | Parameters | Type    | Required | Comment                               |
 | ---------- | ------- | -------- | ------------------------------------- |
-| token      | String  | Yes      | User token (AnylinkCloud UI token)    |
+| token      | String  | Yes      | User token   |
 | userId     | Integer | Yes      | The `userId` to bind the device list. |
 | deviceId   | Integer | Yes      | AnylinkCloud device id.               |
 
@@ -1252,7 +1205,7 @@ Function: Get device list
 
 | Parameters   | Type    | Required | Comment                                                      |
 | ------------ | ------- | -------- | ------------------------------------------------------------ |
-| token        | String  | Yes      | User token. Both types of tokens are available               |
+| token        | String  | Yes      | User token          |
 | hash         | String  | No       | 'tetrascience'                                               |
 | serialNumber | Integer | No       | AnyLink box serial number. If it is null, API will return all the devices in permission of this token. |
 
@@ -1313,7 +1266,7 @@ Function: Get user ID
 
 | Parameters  | Type   | Required | Comment                                                      |
 | ----------- | ------ | -------- | ------------------------------------------------------------ |
-| token       | String | Yes      | User token, got from API `/user/getToken` (AnylinkCloud UI token) |
+| token       | String | Yes      | User token               |
 | tenantEname | String | Yes      | tenant name                                                  |
 | loginName   | String | Yes      | user name                                                    |
 
@@ -1366,7 +1319,7 @@ Function: Get OTA file list uploaded to AnylinkCloud
 
 | Parameters | Type   | Required | Comment                                        |
 | ---------- | ------ | -------- | ---------------------------------------------- |
-| token      | String | Yes      | User token. Both types of tokens are available |
+| token      | String | Yes      | User token                 |
 
  Response JSON:
 
@@ -1405,7 +1358,7 @@ Parameters:
 
 | Parameters    | Type      | Required | Comment                                        |
 | ------------- | --------- | -------- | ---------------------------------------------- |
-| token         | String    | Yes      | User token. Both types of tokens are available |
+| token         | String    | Yes      | User token                  |
 | serialNumbers | JSONArray | Yes      | Anylink serial numbers                         |
 
 Request parameter example:
@@ -1462,7 +1415,7 @@ Parameters:
 
 | Parameters   | Type    | Required | Comment                                                      |
 | ------------ | ------- | -------- | ------------------------------------------------------------ |
-| token        | String  | Yes      | User token. Both types of tokens are available               |
+| token        | String  | Yes      | User token                        |
 | serialNumber | Integer | No       | Anylink serial number. If it is null, API will return all optional versions that have uploaded to server. |
 
 Request parameter example:
@@ -1513,7 +1466,7 @@ Parameters:
 
 | Parameters    | Type    | Required | Comment                                        |
 | ------------- | ------- | -------- | ---------------------------------------------- |
-| token         | String  | Yes      | User token. Both types of tokens are available |
+| token         | String  | Yes      | User token                  |
 | serialNumber  | Integer | Yes      | Anylink serial number                          |
 | targetVersion | String  | Yes      | Target version number to upgrade to via OTA    |
 
@@ -1565,7 +1518,7 @@ Parameters:
 
 | Parameters   | Type    | Required | Comment                                        |
 | ------------ | ------- | -------- | ---------------------------------------------- |
-| token        | String  | Yes      | User token. Both types of tokens are available |
+| token        | String  | Yes      | User token                         |
 | serialNumber | Integer | Yes      | Anylink serial number                          |
 | sessionid    | String  | Yes      | `sessionid` returned by `/ota/startOTA` API    |
 
@@ -1605,6 +1558,25 @@ OTA status code:
 | 5    | AGENT_OTA_DOWNLOAD_FINISHED               | OTA file verification is completed, and agent is performing upgrade |
 | 6    | AGENT_OTA_FINISHED                        | OTA process completed                                        |
 
+
+OTA state code:
+
+| code | Comments                                              |
+| ---- | ----------------------------------------------------- |
+| 100  | Agent successfully received OTA upgrade package       |
+| 101  | OTA upgrade package size verification failed          |
+| 102  | OTA upgrade package block quantity verification error |
+| 103  | Agent timeout receiving OTA upgrade package           |
+| 200  | Agent successfully upgraded OTA                       |
+| 201  | Agent failed to execute OTA upgrade                   |
+| 202  | Agent failed to decompress OTA upgrade package        |
+| 203  | Insufficient disk space in Anylink box                |
+| 1001 | Agent heartbeat timeout                               |
+| 1002 | Timeout waiting for agent response                    |
+
+
+
+
 ## 31. Add user
 
 Function: Add a user
@@ -1619,14 +1591,14 @@ This API will parse the payload and only pickup the fields listed below and disc
 
 | Parameters  | Type       | Required | Comment                                          |
 | ----------- | ---------- | -------- | ------------------------------------------------ |
-| token       | String     | Yes      | User token. Both types of tokens are available   |
+| token       | String     | Yes      | User token                              |
 | param       | JSONObject | Yes      |                                                  |
 | user_name   | String     | Yes      | User name, used to login                         |
-| password    | String     | Yes      | Password should be between 5-16 characters       |
+| password    | String     | Yes      | Password should be between 5-16 characters. Including at least one digit, one uppercase letter, one lowercase letter and one special symbol ?=.[!@#&%()–[{}]:;',?/~$^+=<>]       |
 | re_password | String     | Yes      | Enter the password again                         |
 | real_name   | String     | Yes      | Real name                                        |
 | parent_id   | Integer    | No       | User's department id                             |
-| cellphone   | String     | Yes      |                                                  |
+| cellphone   | String     | Yes      | Only numbers or dashes can be used. Dashes cannot be at the head or tail |
 | email       | String     | No       |                                                  |
 | telephone   | String     | No       |                                                  |
 | isadmin     | Integer    | No       | 0 -- ordinary admin, 1-- administrator           |
@@ -1674,7 +1646,7 @@ Parameters:
 
 | Parameters | Type       | Required | Comment                                                      |
 | ---------- | ---------- | -------- | ------------------------------------------------------------ |
-| token      | String     | Yes      | User token, got from API `/user/getToken` (AnylinkCloud UI token) |
+| token      | String     | Yes      | User token                  |
 | userType   | Integer | Yes      | The value is **1**. It means list the department.            |
 
 Response JSON:
@@ -1707,3 +1679,59 @@ Response example:
 }
 ```
 
+## 33. Get device current data list
+
+Function: Get device current data list
+
+Request type: GET
+
+url: `/currentdata/pagination`
+
+Parameters: 
+
+| Parameters | Type    | Required | Comment                                        |
+| ---------- | ------- | -------- | ---------------------------------------------- |
+| token      | String  | Yes      | User token.  |
+| deviceId   | Integer | Yes      | AnylinkCloud device id                         |
+| itemName   | String  | No       | Dataitem name                                  |
+| page       | Integer | Yes      | Page number, starting from 1.                  |
+| perPage    | Integer | Yest     | Number of data per page.                       |
+
+Response JSON:
+
+| Parameters | Type       | Comments                                                     |
+| ---------- | ---------- | ------------------------------------------------------------ |
+| status     | String     | return code: <br />**100**: successful <br />**103**: parameter error <br />**104**: invalid token <br />**111**: For some other errors, refer to the "msg" value. |
+| msg        | String     | Error message                                                |
+| result     | JSONObject | `data `  JSONArray<br>        `devid`  AnylinkCloud device id<br>        `deviceName` device name<br>        `itemid` dataitem id<br>        `itemname` dataitem name<br>        `alias` dataitem alias<br>        `htime` time of data collection, time string(GMT-4)<br>        `val` current value of data item<br>        `datatype_name` data type<br>        `datatype_id` data type id<br>        `config` dataitem configuration<br>       `readOnly ` 1--the value of the dataitem can be modified through remote control<br>                          0--remote control is not supported<br>       `quality` data quality<br>        <br>`pageInfo` JSONObject<br>        `page`<br>        `perPage`<br>        `total` |
+
+Response example: 
+
+```json
+{
+    "status":"100",
+    "result":{
+        "data":[
+            {
+                "alias":"temperature",
+                "config":"0",
+                "datatype_id":"a",
+                "datatype_name":"Number",
+                "deviceName":"AlexandriaLaunchLabs-018-A",
+                "devid":"1742180353",
+                "htime":"2022-03-17 21:19:20.945",
+                "itemid":"1",
+                "itemname":"temp",
+                "quality":"g",
+                "readOnly":1,
+                "val":"-26.06"
+            }
+        ],
+        "pageInfo":{
+            "page":1,
+            "perPage":10,
+            "total":1
+        }
+    }
+}
+```
