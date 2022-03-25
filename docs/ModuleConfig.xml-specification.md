@@ -188,12 +188,12 @@ phost;pport;shost;sport;keepalive;qos;retain;bencode;user;password;bindaddr;btls
 | btls      | Whether open TLS                                    |Yes| 1 -- TLS<br>0 -- Non TLS   |
 
 # 5. Update ModuleConfig.xml
-##5.1 using AnyLink Cloud API
+## 5.1 using AnyLink Cloud API
 
 Use AnyLink Cloud API /remoteAgent/sendAnylinkXML (please refer to AnyLink Cloud REST API doc for detail) to update the ModuleConfig.xml in the IoT box.  
 Once IoT agent receives the updated the configuration file, it will automatically restart IoT agent (not rebooting the whole system) and load the new configuration file.
 
-##5.2 Update ModuleConfig.xml manually using SSH
+## 5.2 Update ModuleConfig.xml manually using SSH
 
 It's always recommended to use AnyLink Cloud API to update configuration file whenever is possible.  
 1. SSH into IoT box
