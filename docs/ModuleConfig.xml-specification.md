@@ -10,7 +10,7 @@ March 14th, 2022
 
 **Driver version:** Starting from agent version 3.7.21, we introduced a new feature which agent automatically downloads a specific version of driver from the AnyLink cloud if the driver is not present in the AnyLinkIoT box. This feature requires configuration of attribute `version` in the `driver` element. If attribute `version` is not configured, agent will NOT automatically download driver from AnyLink Cloud even if the driver is not present in the box.
 
-**ra-model** and **ra-device**: This device is configured by AnyLink as a default, which is used to report system information (i.e. uptime, WiFi related information, etc).
+**ra-model** and **ra-device**: This device is configured by AnyLink as a default, which is used to report system information (i.e. uptime, WiFi related information, etc). This is a device represent the IoT box itself and it should be not removed. The task drivers configured in the <task> element by default are the essential drivers for IoT agent to work and they should not be removed.
 
 **Device id**: `id` attribute in `<device>` element (we call it 'agent_device_id') is the unique identification for each device within the IoT agent. AnyLink Cloud will use this value to create `deviceId` in the AnyLink Cloud. Here's the algorithm to generate `deviceId`:  
 ```
@@ -168,30 +168,32 @@ Bellow is a sample configuration file to add a new device with libTModbus driver
 ```
 
  The items in config are as follows：
+ **note** if the value is not required, fill in Null value in the place. username and password are configured based on MQTT server configuration.  
 
 phost;pport;shost;sport;keepalive;qos;retain;bencode;user;password;bindaddr;btls;
 
-|           | **Comments**                                        | **Recommended value**      |
-| --------- | --------------------------------------------------- | -------------------------- |
-| phost     | MQTT server address                                 |                            |
-| pport     | MQTT server port                                    | TLS：8883<br>Non TLS：1883 |
-| shost     | MQTT server address                                 |                            |
-| sport     | MQTT server port                                    | TLS：8883<br>Non TLS：1883 |
-| keepalive | time（use default value）                           | 60                         |
-| qos       | Message quality (use default value)                 | 2                          |
-| retain    | Retain value of MQTT message                        | 0                          |
-| bencode   | User name and password encryption，0-None，1-base64 | 0                          |
-| user      | SSL username                                        |                            |
-| password  | SSL password                                        |                            |
-| bindaddr  | Null value                                          | Null value                 |
-| btls      | Whether open TLS                                    | 1 -- TLS<br>0 -- tcp       |
+|           | **Comments**                                        |**Required**| **Recommended value**      |
+| --------- | --------------------------------------------------- |------------| -------------------------- |
+| phost     | MQTT server address                                 |Yes|                            |
+| pport     | MQTT server port                                    |Yes| TLS：8883<br>Non TLS：1883 |
+| shost     | MQTT server address                                 |Yes|                            |
+| sport     | MQTT server port                                    |Yes| TLS：8883<br>Non TLS：1883 |
+| keepalive | time（use default value）                           |Yes| 60                         |
+| qos       | Message quality (use default value)                 |Yes| 2                          |
+| retain    | Retain value of MQTT message                        |Yes| 0                          |
+| bencode   | User name and password encryption，0-None，1-base64 |Yes| 0                          |
+| user      | SSL username                                       |No|                            |
+| password  | SSL password                                        |No|                            |
+| bindaddr  | Null value                                          |No| Null value                 |
+| btls      | Whether open TLS                                    |Yes| 1 -- TLS<br>0 -- Non TLS   |
 
-# 5. Update ModuleConfig.xml using AnyLink Cloud API
+# 5. Update ModuleConfig.xml
+##5.1 using AnyLink Cloud API
 
 Use AnyLink Cloud API /remoteAgent/sendAnylinkXML (please refer to AnyLink Cloud REST API doc for detail) to update the ModuleConfig.xml in the IoT box.  
 Once IoT agent receives the updated the configuration file, it will automatically restart IoT agent (not rebooting the whole system) and load the new configuration file.
 
-# 6. Update ModuleConfig.xml manually using SSH
+##5.2 Update ModuleConfig.xml manually using SSH
 
 It's always recommended to use AnyLink Cloud API to update configuration file whenever is possible.  
 1. SSH into IoT box
