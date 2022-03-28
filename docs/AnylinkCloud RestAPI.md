@@ -4,7 +4,7 @@
 
 
 Version 4.2.9<br>
-March 21th, 2022
+March 28th, 2022
 
 
 The token authentication of the following APIs adds support for `Authorization: Bearer [token]` in http/https request header. At the same time, it also continues to support the way of carrying tokens in the request body. If both the request body and the header contain a token, the one in the header shall prevail.
@@ -61,6 +61,16 @@ Sample response:
     "data":"dc91c34b-6a11-437a-ab8e-fa6fdc3e547b"
 }
 ```
+
+
+## 2. Get token for AnylinkCloud API (**deprecated since v4.2.9**)
+
+Function: This token is used to call Anylink Cloud APIs.
+The token is valid for 10 hours. After the timeout, you need to obtain a new token.
+
+Request type: POST
+
+url: /user/login
 
 
 ## 3. Change AnylinkCloud API password
@@ -484,7 +494,7 @@ Response example:
 ```
 {
     "status":"100",
-    "data":"<AnyLink><BasicInfo><HardwareModel>AnyLink 200</HardwareModel><AgentVersion>V3.6.6</AgentVersion><SoftVersion>DA-3.3.77</SoftVersion><SerialNumber>1400032</SerialNumber></BasicInfo>.......<NetworkInfo muti="YES" hostname="id0032"><Mode>gateway</Mode><Model>simcom</Model><WAN dhcp="NO" mask="255.255.255.0" gateway="192.168.100.1" dns="114.114.114.114" ip="192.168.100.215"/><LAN dhcp="NO" mask="255.255.255.0" gateway="192.168.101.1" dns="114.114.114.114" ip="192.168.101.204"/></NetworkInfo><VPN display="YES"/><Wifi><W_Modestatus>start</W_Modestatus><W_SSID>redbudtek-Guest</W_SSID><W_Password/><W_Status>COMPLETED</W_Status><W_IP>192.168.1.113</W_IP><W_DHCP>YES</W_DHCP><W_GATEWAY>0.0.0.0</W_GATEWAY><W_STRONG>-79</W_STRONG><W_NETMASK>255.255.255.0</W_NETMASK></Wifi>......</AnyLink>"
+    "data":"<AnyLink><BasicInfo><HardwareModel>AnyLink 200</HardwareModel><AgentVersion>V3.6.6</AgentVersion><SoftVersion>DA-3.3.77</SoftVersion><SerialNumber>1400032</SerialNumber></BasicInfo>.......<NetworkInfo muti="YES" hostname="id0032"><Mode>gateway</Mode><Model>simcom</Model><WAN dhcp="NO" mask="255.255.255.0" gateway="192.168.100.1" dns="8.8.8.8" ip="192.168.100.215"/><LAN dhcp="NO" mask="255.255.255.0" gateway="192.168.101.1" dns="8.8.8.8" ip="192.168.101.204"/></NetworkInfo><VPN display="YES"/><Wifi><W_Modestatus>start</W_Modestatus><W_SSID>redbudtek-Guest</W_SSID><W_Password/><W_Status>COMPLETED</W_Status><W_IP>192.168.1.113</W_IP><W_DHCP>YES</W_DHCP><W_GATEWAY>0.0.0.0</W_GATEWAY><W_STRONG>-79</W_STRONG><W_NETMASK>255.255.255.0</W_NETMASK></Wifi>......</AnyLink>"
 }
 ```
 
@@ -552,10 +562,10 @@ Anylink.xml structure:
 ```xml
 <AnyLink> 
   <BasicInfo> 
-    <HardwareModel>AnyLink 100</HardwareModel>  
-    <AgentVersion>V3.6.7</AgentVersion>  
-    <SoftVersion>DA-3.4.7</SoftVersion>  
-    <SerialNumber>1401561</SerialNumber> 
+    <HardwareModel>NeuroQ 200</HardwareModel>  
+    <AgentVersion>V3.7.25</AgentVersion>  
+    <SoftVersion>NeuroQ-3.8.2</SoftVersion>  
+    <SerialNumber>1801561</SerialNumber> 
   </BasicInfo>  
   <ZigbeeInfo> 
     <Type>0</Type>  
@@ -578,14 +588,14 @@ Anylink.xml structure:
   <NetworkInfo muti="YES" hostname="id1561"> 
     <Mode>gateway</Mode>  
     <Model>simcom</Model>  
-    <WAN mac="C4:F3:12:F2:F2:B3" dns="114.114.114.114" ip="192.168.100.220" dhcp="NO" mask="255.255.255.0" gateway="192.168.100.1"/>  
-    <LAN mac="C4:F3:12:F2:F2:B5" dns="114.114.114.114" ip="192.168.101.204" dhcp="NO" mask="255.255.255.0" gateway="192.168.101.1"/> 
+    <WAN mac="C4:F3:12:F2:F2:B3" dns="8.8.8.8" ip="192.168.100.220" dhcp="NO" mask="255.255.255.0" gateway="192.168.100.1"/>  
+    <LAN mac="C4:F3:12:F2:F2:B5" dns="8.8.8.8" ip="192.168.101.204" dhcp="NO" mask="255.255.255.0" gateway="192.168.101.1"/> 
   </NetworkInfo>  
   <VPN display="YES"/>  
   <Wifi> 
     <W_Modestatus>start</W_Modestatus>  
-    <W_SSID>redbudtek-Guest</W_SSID>  
-    <W_Password>82602929</W_Password>  
+    <W_SSID>anylink-Guest</W_SSID>  
+    <W_Password>password</W_Password>  
     <W_Status>COMPLETED</W_Status>  
     <W_IP>192.168.1.113</W_IP>  
     <W_DHCP>YES</W_DHCP>  
@@ -608,7 +618,7 @@ Anylink.xml structure:
     </W_Remote> 
   </Wifi>  
   <CloudInfo> 
-    <Address>s1.anylinkcloud.com:8686</Address> 
+    <Address>us-s1.anylinkcloud.com:8883</Address> 
   </CloudInfo>  
   <ApnInfo> 
     <IsAuto>0</IsAuto>  
