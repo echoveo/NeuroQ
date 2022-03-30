@@ -82,6 +82,7 @@ The values inside "{{ }}" will vary between different boxes and releases.
 | agent/model/device                               | id            | Yes          | Device ID，ra-device must have id as 1023                    |
 |                                                  | n             | Yes          | Device name: letters, numbers and &#39;-&#39;, &#39;+&#39; are allowed |
 |                                                  | ip            | Yes          | Reserved attribute, default to 192.168.1.1                   |
+|                                                  | type          | No           | type of device |
 | agent/model/device/driver                        | n             | Yes          | Driver name                                                  |
 |                                                  | config        | Yes          | Driver config string: usually defines how driver communicates with data source. Thisis driver specific, please refer each driver document for detail. |
 |                                                  | version       | No           | Driver version.                                              |
