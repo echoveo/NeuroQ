@@ -169,7 +169,7 @@ Bellow is a sample configuration file to add a new device with libTModbus driver
 ```
 
  The items in config are as follows：
- **note** if the value is not required, fill in Null value in the place. username and password are configured based on MQTT server configuration.  
+ **note** if the value is not required, fill in empty string in the place. username and password are configured based on MQTT server configuration.  
 
 phost;pport;shost;sport;keepalive;qos;retain;bencode;user;password;bindaddr;btls;
 
@@ -185,7 +185,7 @@ phost;pport;shost;sport;keepalive;qos;retain;bencode;user;password;bindaddr;btls
 | bencode   | User name and password encryption，0-None，1-base64 |Yes| 0                          |
 | user      | SSL username                                       |No|                            |
 | password  | SSL password                                        |No|                            |
-| bindaddr  | Null value                                          |No| Null value                 |
+| bindaddr  | empty string                                          |No| empty string                 |
 | btls      | Whether open TLS                                    |Yes| 1 -- TLS<br>0 -- Non TLS   |
 
 # 5. Update ModuleConfig.xml
