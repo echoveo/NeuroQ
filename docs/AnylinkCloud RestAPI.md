@@ -81,7 +81,7 @@ Request type: PUT
 
 url: /user/password
 
-Parameters:
+Parameters: append URL
 
 | Parameters | Type   | Required | Comment                                                    |
 | ---------- | ------ | -------- | ---------------------------------------------------------- |
@@ -114,7 +114,7 @@ Request type: GET
 
 url: /devicelist/getDeviceID
 
-Parameters:
+Parameters: append URL
 
 | Parameters | Type    | Required | Comment                   |
 | ---------- | ------- | -------- | ------------------------- |
@@ -277,7 +277,7 @@ Request type: GET
 
 url: /anylinkAttribute
 
-Parameters:
+Parameters: append URL
 
 | Parameters   | Type    | Required | Comment                                        |
 | ------------ | ------- | -------- | ---------------------------------------------- |
@@ -327,7 +327,7 @@ Request type: GET
 
 url: /historydata
 
-Parameters:
+Parameters: append URL
 
 | Parameters | Type    | Required | Comment                                                      |
 | ---------- | ------- | -------- | ------------------------------------------------------------ |
@@ -400,7 +400,7 @@ Request type: PUT
 
 url： /remoteAgent/uploadCmd
 
-Parameters:
+Parameters: append URL
 
 | Parameters   | Type    | Required | Comment                                                      |
 | ------------ | ------- | -------- | ------------------------------------------------------------ |
@@ -441,7 +441,7 @@ Request type: GET
 
 url： /control/result
 
-Parameters:
+Parameters: append URL
 
 | Parameters | Type   | Require | Comment                                                      |
 | ---------- | ------ | ------- | ------------------------------------------------------------ |
@@ -472,7 +472,7 @@ Request type: GET
 
 url： /device/readAnylinkXml
 
-Parameters: JSON
+Parameters: append URL
 
 | Parameters   | Value   | Required | Comments                                                 |
 | ------------ | ------- | -------- | -------------------------------------------------------- |
@@ -506,7 +506,7 @@ Request type: POST
 
 url： /remoteAgent/sendAnylinkXML
 
-Parameters:
+Parameters: JSON
 
 | Parameters   | Value   | Required | Comments                                                     |
 | ------------ | ------- | -------- | ------------------------------------------------------------ |
@@ -818,7 +818,7 @@ Request type GET
 
 url： /agent/register
 
-Prameters: JSON
+Prameters: append URL
 
 | Parameters   | Type    | Required | Comment                                                |
 | ------------ | ------- | -------- | ------------------------------------------------------ |
@@ -895,7 +895,7 @@ Request type: GET
 
 url： /rdd/rddVersionList
 
-Prameters:
+Prameters: append URL
 
 | Parameters    | Type    | Required | Comment                                                      |
 | ------------- | ------- | -------- | ------------------------------------------------------------ |
@@ -938,7 +938,7 @@ Request type: DELETE
 
 url： /rdd/deleteRddVersion
 
-Prameters:
+Prameters: JSON
 
 | Parameters | Type   | Required | Comment                                        |
 | ---------- | ------ | -------- | ---------------------------------------------- |
@@ -964,7 +964,7 @@ Request type: POST
 
 url: /agentList/condition
 
-Prameters:
+Prameters: JSON
 
 | Parameters | Type      | Required | Comment                                        |
 | ---------- | --------- | -------- | ---------------------------------------------- |
@@ -1015,7 +1015,7 @@ Request type: GET
 
 url: /agentList
 
-Prameters:
+Prameters: append URL
 
 | Parameters | Type   | Required | Comment                                        |
 | ---------- | ------ | -------- | ---------------------------------------------- |
@@ -1058,7 +1058,7 @@ Request type: GET
 
 url: /agent
 
-Prameters:
+Prameters: append URL
 
 | Parameters   | Type    | Required | Comment                                        |
 | ------------ | ------- | -------- | ---------------------------------------------- |
@@ -1101,7 +1101,7 @@ Response JSON:
 
  url: `/userDevice/listByPagination`
 
- Prameters:
+ Prameters: append URL
 
 | Parameters   | Type    | Required | Comment                                                      |
 | ------------ | ------- | -------- | ------------------------------------------------------------ |
@@ -1149,7 +1149,7 @@ Response JSON:
 
  url: `/userDevice/add`
 
- Prameters:
+ Prameters: JSON
 
 | Parameters | Type    | Required | Comment                                                      |
 | ---------- | ------- | -------- | ------------------------------------------------------------ |
@@ -1180,7 +1180,7 @@ Function: Remove device from a user
 
  url: `/userDevice/deleteByUserIdAndDeviceId`
 
- Prameters:
+ Prameters: append URL
 
 | Parameters | Type    | Required | Comment                               |
 | ---------- | ------- | -------- | ------------------------------------- |
@@ -1211,7 +1211,7 @@ Function: Get device list
 
  url: `/devicelist`
 
- Prameters:
+ Prameters: append URL
 
 | Parameters   | Type    | Required | Comment                                                      |
 | ------------ | ------- | -------- | ------------------------------------------------------------ |
@@ -1272,7 +1272,7 @@ Function: Get user ID
 
  url: `/user/findByUsername`
 
- Prameters:
+ Prameters: append URL
 
 | Parameters  | Type   | Required | Comment                                                      |
 | ----------- | ------ | -------- | ------------------------------------------------------------ |
@@ -1325,7 +1325,7 @@ Function: Get OTA file list uploaded to AnylinkCloud
 
  url: `/ota/OTAVersionList`
 
- Prameters:
+ Prameters: append URL
 
 | Parameters | Type   | Required | Comment                                        |
 | ---------- | ------ | -------- | ---------------------------------------------- |
@@ -1364,7 +1364,7 @@ Request type: POST
 
 url: `/ota/preCheck`
 
-Parameters:
+Parameters: JSON
 
 | Parameters    | Type      | Required | Comment                                        |
 | ------------- | --------- | -------- | ---------------------------------------------- |
@@ -1421,7 +1421,7 @@ Request type: GET
 
 url: `/ota/optionalVersions`
 
-Parameters:
+Parameters: append URL
 
 | Parameters   | Type    | Required | Comment                                                      |
 | ------------ | ------- | -------- | ------------------------------------------------------------ |
@@ -1472,7 +1472,7 @@ Request type: POST
 
 url: `/ota/startOTA`
 
-Parameters:
+Parameters: JSON
 
 | Parameters    | Type    | Required | Comment                                        |
 | ------------- | ------- | -------- | ---------------------------------------------- |
@@ -1524,7 +1524,7 @@ Request type: GET
 
 url: `/ota/downloadStatus`
 
-Parameters:
+Parameters: append URL
 
 | Parameters   | Type    | Required | Comment                                        |
 | ------------ | ------- | -------- | ---------------------------------------------- |
@@ -1652,7 +1652,7 @@ Request type: GET
 
 url: `/user/getTenantUserTree`
 
-Parameters: 
+Parameters: append URL
 
 | Parameters | Type       | Required | Comment                                                      |
 | ---------- | ---------- | -------- | ------------------------------------------------------------ |
@@ -1697,7 +1697,7 @@ Request type: GET
 
 url: `/currentdata/pagination`
 
-Parameters: 
+Parameters: append URL
 
 | Parameters | Type    | Required | Comment                                        |
 | ---------- | ------- | -------- | ---------------------------------------------- |
