@@ -1599,20 +1599,20 @@ Parameters: JSON
 
 This API will parse the payload and only pickup the fields listed below and discard the others which are not mentioned in the following list. 
 
-| Parameters  | Type       | Required | Comment                                          |
-| ----------- | ---------- | -------- | ------------------------------------------------ |
-| token       | String     | Yes      | User token                              |
-| param       | JSONObject | Yes      |                                                  |
-| user_name   | String     | Yes      | User name, used to login                         |
-| password    | String     | Yes      | Password should be between 5-16 characters. Including at least one digit, one uppercase letter, one lowercase letter and one special symbol ?=.[!@#&%()–[{}]:;',?/~$^+=<>]       |
-| re_password | String     | Yes      | Enter the password again                         |
-| real_name   | String     | Yes      | Real name                                        |
-| parent_id   | Integer    | No       | User's department id                             |
-| cellphone   | String     | Yes      | Only numbers or dashes can be used. Dashes cannot be at the head or tail |
-| email       | String     | No       |                                                  |
-| telephone   | String     | No       |                                                  |
-| isadmin     | Integer    | No       | 0 -- ordinary admin, 1-- administrator           |
-| type        | Integer    | Yes      | User type, 0 -- add a user, 1-- add a department |
+| Parameters  | Type       | Required | Comment                                                      |
+| ----------- | ---------- | -------- | ------------------------------------------------------------ |
+| token       | String     | Yes      | User token                                                   |
+| param       | JSONObject | Yes      |                                                              |
+| user_name   | String     | Yes      | User name, used to login. Length should between 2-22. And it can only consist of upper and lower case letters + numbers + underscores. (Regular expression /^[a-zA-Z0-9_]+$/) |
+| password    | String     | Yes      | Password should be between 5-16 characters. Including at least one digit, one uppercase letter, one lowercase letter and one special symbol ?=.[!@#&%()–[{}]:;',?/~$^+=<>] |
+| re_password | String     | Yes      | Enter the password again                                     |
+| real_name   | String     | Yes      | Real name. The max length is 50.                             |
+| parent_id   | Integer    | No       | User's department id                                         |
+| cellphone   | String     | Yes      | Only numbers or dashes can be used. Dashes cannot be at the head or tail, and only one short dash is allowed. And max length is 50. |
+| email       | String     | No       | The max length is 50. And it needs to conform to the format specification.<br>The regular expression that can be referenced is: ^[a-zA-Z0-9.!#$%&'\*+\/=?^_`{\|}~-]+@\[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.\[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$ |
+| telephone   | String     | No       | The max length is 20. Only numbers are allowed.              |
+| isadmin     | Integer    | No       | 0 -- ordinary admin, 1-- administrator                       |
+| type        | Integer    | Yes      | User type, 0 -- add a user, 1-- add a department             |
 
 Request parameter example:
 
