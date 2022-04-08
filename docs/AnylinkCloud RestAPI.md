@@ -1599,20 +1599,20 @@ Parameters: JSON
 
 This API will parse the payload and only pickup the fields listed below and discard the others which are not mentioned in the following list. 
 
-| Parameters  | Type       | Required | Comment                                          |
-| ----------- | ---------- | -------- | ------------------------------------------------ |
-| token       | String     | Yes      | User token                              |
-| param       | JSONObject | Yes      |                                                  |
-| user_name   | String     | Yes      | User name, used to login                         |
-| password    | String     | Yes      | Password should be between 5-16 characters. Including at least one digit, one uppercase letter, one lowercase letter and one special symbol ?=.[!@#&%()–[{}]:;',?/~$^+=<>]       |
-| re_password | String     | Yes      | Enter the password again                         |
-| real_name   | String     | Yes      | Real name                                        |
-| parent_id   | Integer    | No       | User's department id                             |
-| cellphone   | String     | Yes      | Only numbers or dashes can be used. Dashes cannot be at the head or tail |
-| email       | String     | No       |                                                  |
-| telephone   | String     | No       |                                                  |
-| isadmin     | Integer    | No       | 0 -- ordinary admin, 1-- administrator           |
-| type        | Integer    | Yes      | User type, 0 -- add a user, 1-- add a department |
+| Parameters  | Type       | Required | Comment                                                      |
+| ----------- | ---------- | -------- | ------------------------------------------------------------ |
+| token       | String     | Yes      | User token                                                   |
+| param       | JSONObject | Yes      |                                                              |
+| user_name   | String     | Yes      | User name, used to login. Length should between 2-22. And it can only consist of upper and lower case letters + numbers + underscores. (Regular expression /^[a-zA-Z0-9_]+$/) |
+| password    | String     | Yes      | Password should be between 5-16 characters. Including at least one digit, one uppercase letter, one lowercase letter and one special symbol ?=.[!@#&%()–[{}]:;',?/~$^+=<>] |
+| re_password | String     | Yes      | Enter the password again                                     |
+| real_name   | String     | Yes      | Real name. The max length is 50.                             |
+| parent_id   | Integer    | No       | User's department id                                         |
+| cellphone   | String     | Yes      | Only numbers or dashes can be used. Dashes cannot be at the head or tail, and only one short dash is allowed. And max length is 50. |
+| email       | String     | No       | The max length is 50. And it needs to conform to the format specification.<br>The regular expression that can be referenced is: ^[a-zA-Z0-9.!#$%&'\*+\/=?^_`{\|}~-]+@\[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.\[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$ |
+| telephone   | String     | No       | The max length is 20. Only numbers are allowed.              |
+| isadmin     | Integer    | No       | 0 -- ordinary admin, 1-- administrator                       |
+| type        | Integer    | Yes      | User type, 0 -- add a user, 1-- add a department             |
 
 Request parameter example:
 
@@ -1745,3 +1745,55 @@ Response example:
     }
 }
 ```
+
+## 34. OTA history
+
+Function: Get Anylink OTA history
+
+Request type: GET
+
+url: `/ota/history`
+
+Parameters: append URL
+
+| Parameters   | Type    | Required | Comment                   |
+| ------------ | ------- | -------- | ------------------------- |
+| token        | String  | Yes      | User token.               |
+| serialNumber | Integer | Yes      | AnyLink box serial number |
+
+Response JSON:
+
+| Parameters | Type      | Comments                                                     |
+| ---------- | --------- | ------------------------------------------------------------ |
+| status     | String    | return code: <br />**100**: successful <br />**103**: parameter error <br />**104**: invalid token <br />**111**: For some other errors, refer to the "msg" value. |
+| msg        | String    | Error message                                                |
+| data       | JSONArray | `id`  <br>`serialNumber` AnyLink box serial number<br>`sessionid`  The sessionid of this OTA record<br>`oldVersion` The version of Anylink before OTA upgrade<br>`newVersion` The version of Anylink after OTA upgrade<br>`startTime`  OTA upgrade time<br>`cmd`  The command send to Anylink for OTA<br>`state` OTA final state<br>`stateCode`  OTA final state code<br>`status`  Stage of Ota completion<br>`statusCode ` Stage code of Ota completion<br>`finished` Has OTA upgrade been completed<br>`finishedTime` OTA completion time |
+
+Response example: 
+
+```json
+{
+    "status":"100",
+    "data":[
+        {
+            "cmd":"{\"csign\":\"b2FPTMMRuMotTN36znMzJChc7fHvtq/ZBKx3irwpPqJbkfO6RubPuMzCeXrN1NhyDFIfyWP/IbYDH2fnEUROKM5aH7R6U/+xVP1J3O81OSMcSdeJYU8p9ohxeiZrVD5gRbjVg+VQGMRynSWqPo6Xw4HKlAfS7fjNQ7HyFmk0I7A=\",\"file\":\"OTA-patch_usa_14-20220131-v020.zip\",\"fsign\":\"51oR5dB9c2S7wkzKOhPNaw==\",\"fsize\":5264444,\"nblock\":330,\"sessionid\":\"1647962509943\",\"type\":0}",
+            "finished":true,
+            "finishedTime":1647962630840,
+            "id":881,
+            "newVersion":"OTA-3.8.1",
+            "oldVersion":"3.7.25",
+            "serialNumber":1800333,
+            "sessionid":"1647962509943",
+            "startTime":1647962510085,
+            "state":"AGENT_OTA_DOWNLOAD_UPDATE_REQUEST_TIMEOUT",
+            "stateCode":1002,
+            "status":"AGENT_OTA_FINISHED",
+            "statusCode":7
+        }
+    ]    
+}
+```
+
+
+
+
