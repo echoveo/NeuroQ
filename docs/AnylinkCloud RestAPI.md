@@ -81,11 +81,11 @@ Request type: PUT
 
 url: /user/password
 
-Parameters:
+Parameters: append URL
 
 | Parameters | Type   | Required | Comment                                                    |
 | ---------- | ------ | -------- | ---------------------------------------------------------- |
-| token      | String | yes      | User token |
+| token      | String | no      | User token |
 | hash       | String | yes      | hash code                                                  |
 | password   | String | yes      | new password                                               |
 
@@ -114,11 +114,11 @@ Request type: GET
 
 url: /devicelist/getDeviceID
 
-Parameters:
+Parameters: append URL
 
 | Parameters | Type    | Required | Comment                   |
 | ---------- | ------- | -------- | ------------------------- |
-| token      | String  | yes      | User token                |
+| token      | String  | no      | User token                |
 | hash       | String  | yes      | hash (use ‘tetrascience’) |
 | deviceName | String  | yes      | device name               |
 | agentID    | Integer | yes      | serialnumber              |
@@ -156,7 +156,7 @@ Parameters: JSON
 
 | Parameters   | Sub Parameters | Type    | Required | Comment                                                      |
 | ------------ | -------------- | ------- | -------- | ------------------------------------------------------------ |
-| token        |                | String  | yes      | User token              |
+| token        |                | String  | no      | User token              |
 | hash         |                | String  | yes      | hash is not used for now（use ‘tetrascience’ as example and null is OK too） |
 | serialNumber |                | Integer | yes      | AnyLink box serial number                                    |
 | deviceId     |                | Integer | yes      | Anylink cloud device id. This value must be configured with libTetraSerialCmd driver. |
@@ -277,11 +277,11 @@ Request type: GET
 
 url: /anylinkAttribute
 
-Parameters:
+Parameters: append URL
 
 | Parameters   | Type    | Required | Comment                                        |
 | ------------ | ------- | -------- | ---------------------------------------------- |
-| token        | String  | yes      | User token |
+| token        | String  | no      | User token |
 | serialNumber | Integer | yes      | AnyLink box serial number                      |
 
 Response: JSON
@@ -327,11 +327,11 @@ Request type: GET
 
 url: /historydata
 
-Parameters:
+Parameters: append URL
 
 | Parameters | Type    | Required | Comment                                                      |
 | ---------- | ------- | -------- | ------------------------------------------------------------ |
-| token      | String  | yes      | User token.                                                  |
+| token      | String  | no      | User token.                                                  |
 | hash       | String  | yes      | hash（use ‘tetrascience’）                                   |
 | deviceid   | Integer | yes      | AnylinkCloud device id                                       |
 | dataitemid | String  | yes      | AnylinkCloud dataitem id                                     |
@@ -400,11 +400,11 @@ Request type: PUT
 
 url： /remoteAgent/uploadCmd
 
-Parameters:
+Parameters: append URL
 
 | Parameters   | Type    | Required | Comment                                                      |
 | ------------ | ------- | -------- | ------------------------------------------------------------ |
-| token        | String  | yes      | User token            |
+| token        | String  | no      | User token            |
 | hash         | String  | yes      | hash（use ‘tetrascience’）                                   |
 | filetype     | String  | yes      | Type of file to upload: anylink_xml(for WIFI config), idinfo_xml alldevicedriver_xml, config_xml |
 | serialnumber | Integer | yes      | AnyLink box serial number                                    |
@@ -441,11 +441,11 @@ Request type: GET
 
 url： /control/result
 
-Parameters:
+Parameters: append URL
 
 | Parameters | Type   | Require | Comment                                                      |
 | ---------- | ------ | ------- | ------------------------------------------------------------ |
-| token      | String | yes     | User token              |
+| token      | String | no     | User token              |
 | hash       | String | yes     | hash（use ‘tetrascience’）                                   |
 | sign       | String | yes     | Get the result for the command，this is the data value from API "/remoteAgent/uploadCmd" |
 
@@ -472,11 +472,11 @@ Request type: GET
 
 url： /device/readAnylinkXml
 
-Parameters: JSON
+Parameters: append URL
 
 | Parameters   | Value   | Required | Comments                                                 |
 | ------------ | ------- | -------- | -------------------------------------------------------- |
-| token        | String  | yes      | User token         |
+| token        | String  | no      | User token         |
 | hash         | String  | yes      | hash（use ‘tetrascience’）                               |
 | xmlType      | String  | yes      | XML file type： anylink_xml(for WIFI config), config_xml |
 | serialNumber | Integer | yes      | AnyLink box serial number                                |
@@ -506,11 +506,11 @@ Request type: POST
 
 url： /remoteAgent/sendAnylinkXML
 
-Parameters:
+Parameters: JSON
 
 | Parameters   | Value   | Required | Comments                                                     |
 | ------------ | ------- | -------- | ------------------------------------------------------------ |
-| token        | String  | yes      | User token        |
+| token        | String  | no      | User token        |
 | hash         | String  | yes      | hash（use ‘tetrascience’）                                   |
 | filetype     | String  | yes      | XML file type： anylink_xml(for WIFI config), config_xml (ModuleConfig.xml for agent)    |
 | serialnumber | Integer | yes      | AnyLink box serial number                                    |
@@ -818,11 +818,11 @@ Request type GET
 
 url： /agent/register
 
-Prameters: JSON
+Prameters: append URL
 
 | Parameters   | Type    | Required | Comment                                                |
 | ------------ | ------- | -------- | ------------------------------------------------------ |
-| token        | String  | yes      | User token        |
+| token        | String  | no      | User token        |
 | serialNumber | Integer | yes      | AnyLink box serial number                              |
 | registerID   | Long    | yes      | The value is the data from /remoteAgent/sendAnylinkXML |
 
@@ -845,7 +845,7 @@ Prameters: form-data
 
 | Parameters | Type   | Required | Comment                                                      |
 | ---------- | ------ | -------- | ------------------------------------------------------------ |
-| token      | String | yes      | User token              |
+| token      | String | no      | User token              |
 | oldVersion | String | yes      | The agent version for which the upgrade package is applicable. Multiple version numbers are separated by commas, e.g. "3.7.0,3.7.1". |
 | newVersion | String | yes      | Upgraded version                                             |
 | fileName   | String | yes      | File name of upgrade file                                    |
@@ -870,7 +870,7 @@ Prameters: form-data
 
 | Parameters    | Type   | Required | Comment                                                      |
 | ------------- | ------ | -------- | ------------------------------------------------------------ |
-| token         | String | Yes      | User token               |
+| token         | String | no      | User token               |
 | agentVersion  | String | Yes      | The agent version for which the upgrade package is applicable. Multiple version numbers are separated by commas, e.g. "3.7.0,3.7.1". You can also fill in the version range, separated by "-", e.g. "3.0.1-3.2.0". |
 | driverName    | String | Yes      | Driver name                                                  |
 | driverVersion | String | Yes      | Driver version                                               |
@@ -895,11 +895,11 @@ Request type: GET
 
 url： /rdd/rddVersionList
 
-Prameters:
+Prameters: append URL
 
 | Parameters    | Type    | Required | Comment                                                      |
 | ------------- | ------- | -------- | ------------------------------------------------------------ |
-| token         | String  | Yes      | User token            |
+| token         | String  | No      | User token            |
 | page          | Integer | No       | Page number, starting from 1. Default value is "1"           |
 | perPage       | Integer | No       | Number of data per page. Default value is "10"               |
 | driverVersion | String  | No       | Driver version                                               |
@@ -938,11 +938,11 @@ Request type: DELETE
 
 url： /rdd/deleteRddVersion
 
-Prameters:
+Prameters: JSON
 
 | Parameters | Type   | Required | Comment                                        |
 | ---------- | ------ | -------- | ---------------------------------------------- |
-| token      | String | Yes      | User token |
+| token      | String | No      | User token |
 | id         | String | Yes      |                                                |
 
 Response JSON:
@@ -964,11 +964,11 @@ Request type: POST
 
 url: /agentList/condition
 
-Prameters:
+Prameters: JSON
 
 | Parameters | Type      | Required | Comment                                        |
 | ---------- | --------- | -------- | ---------------------------------------------- |
-| token      | String    | Yes      | User token |
+| token      | String    | No      | User token |
 | agentIds   | JSONArray | Yes      | An Array of IoT boxes' Serial Numbers          |
 
 Sample request:
@@ -1015,11 +1015,11 @@ Request type: GET
 
 url: /agentList
 
-Prameters:
+Prameters: append URL
 
 | Parameters | Type   | Required | Comment                                        |
 | ---------- | ------ | -------- | ---------------------------------------------- |
-| token      | String | Yes      | User token |
+| token      | String | No      | User token |
 
 Response JSON:
 
@@ -1058,11 +1058,11 @@ Request type: GET
 
 url: /agent
 
-Prameters:
+Prameters: append URL
 
 | Parameters   | Type    | Required | Comment                                        |
 | ------------ | ------- | -------- | ---------------------------------------------- |
-| token        | String  | Yes      | User token  |
+| token        | String  | No      | User token  |
 | serialNumber | Integer | Yes      |                                                |
 
 Response JSON:
@@ -1101,11 +1101,11 @@ Response JSON:
 
  url: `/userDevice/listByPagination`
 
- Prameters:
+ Prameters: append URL
 
 | Parameters   | Type    | Required | Comment                                                      |
 | ------------ | ------- | -------- | ------------------------------------------------------------ |
-| token        | String  | Yes      | User token                    |
+| token        | String  | No      | User token                    |
 | userId       | Integer | No       | The `userId` to get the device list. If `userId` is null, it will be the id of the user corresponding to the `token`. |
 | serialNumber | Integer | No       | Anylink serial number                                        |
 | deviceName   | String  | No       | device name                                                  |
@@ -1149,11 +1149,11 @@ Response JSON:
 
  url: `/userDevice/add`
 
- Prameters:
+ Prameters: JSON
 
 | Parameters | Type    | Required | Comment                                                      |
 | ---------- | ------- | -------- | ------------------------------------------------------------ |
-| token      | String  | Yes      | User token                  |
+| token      | String  | No      | User token                  |
 | userId     | Integer | Yes      | The `userId` to bind the device list.                        |
 | deviceIds  | String  | Yes      | AnylinkCloud device id. Multiple values are separated by commas. |
 
@@ -1180,11 +1180,11 @@ Function: Remove device from a user
 
  url: `/userDevice/deleteByUserIdAndDeviceId`
 
- Prameters:
+ Prameters: append URL
 
 | Parameters | Type    | Required | Comment                               |
 | ---------- | ------- | -------- | ------------------------------------- |
-| token      | String  | Yes      | User token   |
+| token      | String  | No      | User token   |
 | userId     | Integer | Yes      | The `userId` to bind the device list. |
 | deviceId   | Integer | Yes      | AnylinkCloud device id.               |
 
@@ -1211,11 +1211,11 @@ Function: Get device list
 
  url: `/devicelist`
 
- Prameters:
+ Prameters: append URL
 
 | Parameters   | Type    | Required | Comment                                                      |
 | ------------ | ------- | -------- | ------------------------------------------------------------ |
-| token        | String  | Yes      | User token          |
+| token        | String  | No      | User token          |
 | hash         | String  | No       | 'tetrascience'                                               |
 | serialNumber | Integer | No       | AnyLink box serial number. If it is null, API will return all the devices in permission of this token. |
 
@@ -1272,11 +1272,11 @@ Function: Get user ID
 
  url: `/user/findByUsername`
 
- Prameters:
+ Prameters: append URL
 
 | Parameters  | Type   | Required | Comment                                                      |
 | ----------- | ------ | -------- | ------------------------------------------------------------ |
-| token       | String | Yes      | User token               |
+| token       | String | No      | User token               |
 | tenantEname | String | Yes      | tenant name                                                  |
 | loginName   | String | Yes      | user name                                                    |
 
@@ -1325,11 +1325,11 @@ Function: Get OTA file list uploaded to AnylinkCloud
 
  url: `/ota/OTAVersionList`
 
- Prameters:
+ Prameters: append URL
 
 | Parameters | Type   | Required | Comment                                        |
 | ---------- | ------ | -------- | ---------------------------------------------- |
-| token      | String | Yes      | User token                 |
+| token      | String | No      | User token                 |
 
  Response JSON:
 
@@ -1364,11 +1364,11 @@ Request type: POST
 
 url: `/ota/preCheck`
 
-Parameters:
+Parameters: JSON
 
 | Parameters    | Type      | Required | Comment                                        |
 | ------------- | --------- | -------- | ---------------------------------------------- |
-| token         | String    | Yes      | User token                  |
+| token         | String    | No      | User token                  |
 | serialNumbers | JSONArray | Yes      | Anylink serial numbers                         |
 
 Request parameter example:
@@ -1421,11 +1421,11 @@ Request type: GET
 
 url: `/ota/optionalVersions`
 
-Parameters:
+Parameters: append URL
 
 | Parameters   | Type    | Required | Comment                                                      |
 | ------------ | ------- | -------- | ------------------------------------------------------------ |
-| token        | String  | Yes      | User token                        |
+| token        | String  | No      | User token                        |
 | serialNumber | Integer | No       | Anylink serial number. If it is null, API will return all optional versions that have uploaded to server. |
 
 Request parameter example:
@@ -1472,11 +1472,11 @@ Request type: POST
 
 url: `/ota/startOTA`
 
-Parameters:
+Parameters: JSON
 
 | Parameters    | Type    | Required | Comment                                        |
 | ------------- | ------- | -------- | ---------------------------------------------- |
-| token         | String  | Yes      | User token                  |
+| token         | String  | No      | User token                  |
 | serialNumber  | Integer | Yes      | Anylink serial number                          |
 | targetVersion | String  | Yes      | Target version number to upgrade to via OTA    |
 
@@ -1524,11 +1524,11 @@ Request type: GET
 
 url: `/ota/downloadStatus`
 
-Parameters:
+Parameters: append URL
 
 | Parameters   | Type    | Required | Comment                                        |
 | ------------ | ------- | -------- | ---------------------------------------------- |
-| token        | String  | Yes      | User token                         |
+| token        | String  | No      | User token                         |
 | serialNumber | Integer | Yes      | Anylink serial number                          |
 | sessionid    | String  | Yes      | `sessionid` returned by `/ota/startOTA` API    |
 
@@ -1599,20 +1599,20 @@ Parameters: JSON
 
 This API will parse the payload and only pickup the fields listed below and discard the others which are not mentioned in the following list.
 
-| Parameters  | Type       | Required | Comment                                          |
-| ----------- | ---------- | -------- | ------------------------------------------------ |
-| token       | String     | Yes      | User token                              |
-| param       | JSONObject | Yes      |                                                  |
-| user_name   | String     | Yes      | User name, used to login                         |
-| password    | String     | Yes      | Password should be between 5-16 characters. Including at least one digit, one uppercase letter, one lowercase letter and one special symbol ?=.[!@#&%()–[{}]:;',?/~$^+=<>]       |
-| re_password | String     | Yes      | Enter the password again                         |
-| real_name   | String     | Yes      | Real name                                        |
-| parent_id   | Integer    | No       | User's department id                             |
-| cellphone   | String     | Yes      | Only numbers or dashes can be used. Dashes cannot be at the head or tail |
-| email       | String     | No       |                                                  |
-| telephone   | String     | No       |                                                  |
-| isadmin     | Integer    | No       | 0 -- ordinary admin, 1-- administrator           |
-| type        | Integer    | Yes      | User type, 0 -- add a user, 1-- add a department |
+| Parameters  | Type       | Required | Comment                                                      |
+| ----------- | ---------- | -------- | ------------------------------------------------------------ |
+| token       | String     | No      | User token                                                   |
+| param       | JSONObject | Yes      |                                                              |
+| user_name   | String     | Yes      | User name, used to login. Length should between 2-22. And it can only consist of upper and lower case letters + numbers + underscores. (Regular expression /^[a-zA-Z0-9_]+$/) |
+| password    | String     | Yes      | Password should be between 5-16 characters. Including at least one digit, one uppercase letter, one lowercase letter and one special symbol ?=.[!@#&%()–[{}]:;',?/~$^+=<>] |
+| re_password | String     | Yes      | Enter the password again                                     |
+| real_name   | String     | Yes      | Real name. The max length is 50.                             |
+| parent_id   | Integer    | No       | User's department id                                         |
+| cellphone   | String     | Yes      | Only numbers or dashes can be used. Dashes cannot be at the head or tail, and only one short dash is allowed. And max length is 50. |
+| email       | String     | No       | The max length is 50. And it needs to conform to the format specification.<br>The regular expression that can be referenced is: ^[a-zA-Z0-9.!#$%&'\*+\/=?^_`{\|}~-]+@\[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.\[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$ |
+| telephone   | String     | No       | The max length is 20. Only numbers are allowed.              |
+| isadmin     | Integer    | No       | 0 -- ordinary admin, 1-- administrator                       |
+| type        | Integer    | Yes      | User type, 0 -- add a user, 1-- add a department             |
 
 Request parameter example:
 
@@ -1652,11 +1652,11 @@ Request type: GET
 
 url: `/user/getTenantUserTree`
 
-Parameters:
+Parameters: append URL
 
 | Parameters | Type       | Required | Comment                                                      |
 | ---------- | ---------- | -------- | ------------------------------------------------------------ |
-| token      | String     | Yes      | User token                  |
+| token      | String     | No      | User token                  |
 | userType   | Integer | Yes      | The value is **1**. It means list the department.            |
 
 Response JSON:
@@ -1697,11 +1697,11 @@ Request type: GET
 
 url: `/currentdata/pagination`
 
-Parameters:
+Parameters: append URL
 
 | Parameters | Type    | Required | Comment                                        |
 | ---------- | ------- | -------- | ---------------------------------------------- |
-| token      | String  | Yes      | User token.  |
+| token      | String  | No      | User token.  |
 | deviceId   | Integer | Yes      | AnylinkCloud device id                         |
 | itemName   | String  | No       | Dataitem name                                  |
 | page       | Integer | Yes      | Page number, starting from 1.                  |
@@ -1745,3 +1745,55 @@ Response example:
     }
 }
 ```
+
+## 34. OTA history
+
+Function: Get Anylink OTA history
+
+Request type: GET
+
+url: `/ota/history`
+
+Parameters: append URL
+
+| Parameters   | Type    | Required | Comment                   |
+| ------------ | ------- | -------- | ------------------------- |
+| token        | String  | No      | User token.               |
+| serialNumber | Integer | Yes      | AnyLink box serial number |
+
+Response JSON:
+
+| Parameters | Type      | Comments                                                     |
+| ---------- | --------- | ------------------------------------------------------------ |
+| status     | String    | return code: <br />**100**: successful <br />**103**: parameter error <br />**104**: invalid token <br />**111**: For some other errors, refer to the "msg" value. |
+| msg        | String    | Error message                                                |
+| data       | JSONArray | `id`  <br>`serialNumber` AnyLink box serial number<br>`sessionid`  The sessionid of this OTA record<br>`oldVersion` The version of Anylink before OTA upgrade<br>`newVersion` The version of Anylink after OTA upgrade<br>`startTime`  OTA upgrade time<br>`cmd`  The command send to Anylink for OTA<br>`state` OTA final state<br>`stateCode`  OTA final state code<br>`status`  Stage of Ota completion<br>`statusCode ` Stage code of Ota completion<br>`finished` Has OTA upgrade been completed<br>`finishedTime` OTA completion time |
+
+Response example: 
+
+```json
+{
+    "status":"100",
+    "data":[
+        {
+            "cmd":"{\"csign\":\"b2FPTMMRuMotTN36znMzJChc7fHvtq/ZBKx3irwpPqJbkfO6RubPuMzCeXrN1NhyDFIfyWP/IbYDH2fnEUROKM5aH7R6U/+xVP1J3O81OSMcSdeJYU8p9ohxeiZrVD5gRbjVg+VQGMRynSWqPo6Xw4HKlAfS7fjNQ7HyFmk0I7A=\",\"file\":\"OTA-patch_usa_14-20220131-v020.zip\",\"fsign\":\"51oR5dB9c2S7wkzKOhPNaw==\",\"fsize\":5264444,\"nblock\":330,\"sessionid\":\"1647962509943\",\"type\":0}",
+            "finished":true,
+            "finishedTime":1647962630840,
+            "id":881,
+            "newVersion":"OTA-3.8.1",
+            "oldVersion":"3.7.25",
+            "serialNumber":1800333,
+            "sessionid":"1647962509943",
+            "startTime":1647962510085,
+            "state":"AGENT_OTA_DOWNLOAD_UPDATE_REQUEST_TIMEOUT",
+            "stateCode":1002,
+            "status":"AGENT_OTA_FINISHED",
+            "statusCode":7
+        }
+    ]    
+}
+```
+
+
+
+
