@@ -3,15 +3,15 @@
 # AnylinkCloud RestAPI
 
 
-Version 4.2.9<br>
-March 28th, 2022
+Version 4.2.10<br>
+April 8th, 2022
 
 
 The token authentication of the following APIs adds support for `Authorization: Bearer [token]` in http/https request header. At the same time, it also continues to support the way of carrying tokens in the request body. If both the request body and the header contain a token, the one in the header shall prevail.
 
 **The old way of carrying tokens in the request body will be deprecated in the future releases, please switch to the new way of using bearer header token in your new releases.**
 
-The following image shows how to add a `Authorization: Bearer [token]` in the header when using postman to call the interface: 
+The following image shows how to add a `Authorization: Bearer [token]` in the header when using postman to call the interface:
 ![image-20220212121738282](https://user-images.githubusercontent.com/76909130/153696301-1f0d776d-0e6e-4742-8711-c63c7596f6ff.png)
 
 
@@ -387,7 +387,7 @@ Sample Response:
             "val":"99518.921875"
         }
     ]
-} 
+}
 ```
 
 # The following APIs(9-13) are the remote configuration of WiFi
@@ -560,20 +560,20 @@ Reponse value:
 ```
 Anylink.xml structure:
 ```xml
-<AnyLink> 
-  <BasicInfo> 
+<AnyLink>
+  <BasicInfo>
     <HardwareModel>NeuroQ 200</HardwareModel>  
     <AgentVersion>V3.7.25</AgentVersion>  
     <SoftVersion>NeuroQ-3.8.2</SoftVersion>  
-    <SerialNumber>1801561</SerialNumber> 
+    <SerialNumber>1801561</SerialNumber>
   </BasicInfo>  
-  <ZigbeeInfo> 
+  <ZigbeeInfo>
     <Type>0</Type>  
     <NetNumber>50</NetNumber>  
     <NetAddress>0</NetAddress>  
-    <Physchannel>19</Physchannel> 
+    <Physchannel>19</Physchannel>
   </ZigbeeInfo>  
-  <LoraInfo> 
+  <LoraInfo>
     <g_baudrate>9600</g_baudrate>  
     <g_parity>NONE</g_parity>  
     <g_RF_freq>443</g_RF_freq>  
@@ -583,16 +583,16 @@ Anylink.xml structure:
     <g_ID_H>0</g_ID_H>  
     <g_ID_L>0</g_ID_L>  
     <g_net_ID>0</g_net_ID>  
-    <g_power>20db</g_power> 
+    <g_power>20db</g_power>
   </LoraInfo>  
-  <NetworkInfo muti="YES" hostname="id1561"> 
+  <NetworkInfo muti="YES" hostname="id1561">
     <Mode>gateway</Mode>  
     <Model>simcom</Model>  
     <WAN mac="C4:F3:12:F2:F2:B3" dns="8.8.8.8" ip="192.168.100.220" dhcp="NO" mask="255.255.255.0" gateway="192.168.100.1"/>  
-    <LAN mac="C4:F3:12:F2:F2:B5" dns="8.8.8.8" ip="192.168.101.204" dhcp="NO" mask="255.255.255.0" gateway="192.168.101.1"/> 
+    <LAN mac="C4:F3:12:F2:F2:B5" dns="8.8.8.8" ip="192.168.101.204" dhcp="NO" mask="255.255.255.0" gateway="192.168.101.1"/>
   </NetworkInfo>  
   <VPN display="YES"/>  
-  <Wifi> 
+  <Wifi>
     <W_Modestatus>start</W_Modestatus>  
     <W_SSID>anylink-Guest</W_SSID>  
     <W_Password>password</W_Password>  
@@ -604,34 +604,34 @@ Anylink.xml structure:
     <W_STRONG>-83</W_STRONG>  
     <W_NETMASK>255.255.255.0</W_NETMASK>  
     <!-- Fill in here when sending multiple WiFi messages remotely -->  
-    <W_Remote> 
-      <W_List> 
-        <W_Info> 
+    <W_Remote>
+      <W_List>
+        <W_Info>
           <W_SSID>ssid1</W_SSID>  
-          <W_Password>password1</W_Password> 
+          <W_Password>password1</W_Password>
         </W_Info>  
-        <W_Info> 
+        <W_Info>
           <W_SSID>ssid1</W_SSID>  
-          <W_Password>password1</W_Password> 
-        </W_Info> 
-      </W_List> 
-    </W_Remote> 
+          <W_Password>password1</W_Password>
+        </W_Info>
+      </W_List>
+    </W_Remote>
   </Wifi>  
-  <CloudInfo> 
-    <Address>us-s1.anylinkcloud.com:8883</Address> 
+  <CloudInfo>
+    <Address>us-s1.anylinkcloud.com:8883</Address>
   </CloudInfo>  
-  <ApnInfo> 
+  <ApnInfo>
     <IsAuto>0</IsAuto>  
     <Apn/>  
     <Proxy/>  
     <Port/>  
     <Username/>  
-    <Password/> 
+    <Password/>
   </ApnInfo>  
-  <TimeZoneInfo> 
-    <TimeZone>UTC</TimeZone> 
+  <TimeZoneInfo>
+    <TimeZone>UTC</TimeZone>
   </TimeZoneInfo>  
-  <AgentConfig> 
+  <AgentConfig>
     <AgentMode>0</AgentMode>  
     <UploadType>1</UploadType>  
     <RegRetryCount>100</RegRetryCount>  
@@ -642,8 +642,8 @@ Anylink.xml structure:
     <DBEnable>1</DBEnable>  
     <DBSize>10000</DBSize>  
     <DBScanTime>3</DBScanTime>  
-    <BadDataMode>0</BadDataMode> 
-  </AgentConfig> 
+    <BadDataMode>0</BadDataMode>
+  </AgentConfig>
 </AnyLink>
 ```
 | **Element**   | **Comments**                          | **Value**                                                    |
@@ -660,7 +660,7 @@ Anylink.xml structure:
 | W\_NETMASK    | WiFi subnet mask                      | Automatic acquisition                                        |
 | W\_Remote     | Hidden WiFi list                      | Fill in here when sending multiple WiFi messages remotely    |
 
-**Multi-WiFi settings**: 
+**Multi-WiFi settings**:
 
   （1）The WiFi module will select the available WiFi with the best signal in the W_List to connect
 
@@ -668,38 +668,38 @@ Anylink.xml structure:
 
 **ModuleConfig.xml structure:**
 ```xml
-<agent flag="SET-TASKS" id="{{IoTBox-SerialNumber}}" n="{{Agent-Name}}" port="-1" script="1.1.0" sdmwebs="1.1.0" timezone="UTC"> 
-  <model n="{{Model-Name}}"> 
-    <device n="DeviceName" id="3" ip="192.168.1.1" type="test"> 
-      <driver config="1;0" id="3" n="T.IDrv.Task:libTModbus" version="1.4.3"> 
-        <commDataItems> 
+<agent flag="SET-TASKS" id="{{IoTBox-SerialNumber}}" n="{{Agent-Name}}" port="-1" script="1.1.0" sdmwebs="1.1.0" timezone="UTC">
+  <model n="{{Model-Name}}">
+    <device n="DeviceName" id="3" ip="192.168.1.1" type="test">
+      <driver config="1;0" id="3" n="T.IDrv.Task:libTModbus" version="1.4.3">
+        <commDataItems>
           <dataItem n="A1" alias="A1_alias" config="" freq="60000" id="34" report="1" rw="0" type="a"/>  
-          <dataItem n="A2" alias="A2_alias" config="" freq="60000" id="35" report="1" rw="0" type="b"/> 
-        </commDataItems> 
-      </driver> 
-    </device> 
+          <dataItem n="A2" alias="A2_alias" config="" freq="60000" id="35" report="1" rw="0" type="b"/>
+        </commDataItems>
+      </driver>
+    </device>
   </model>  
-  <task> 
-    <TaskDriver> 
-      <driver config="10001" n="T.IDrv.Task:libcontrol"/> 
+  <task>
+    <TaskDriver>
+      <driver config="10001" n="T.IDrv.Task:libcontrol"/>
     </TaskDriver>  
-    <TaskDriver> 
-      <driver config="NULL;115200;8;N;1;0;1;0;0;localhost;10001;6;60;1;10000;3" n="T.IDrv.Task:libzigbee"/> 
+    <TaskDriver>
+      <driver config="NULL;115200;8;N;1;0;1;0;0;localhost;10001;6;60;1;10000;3" n="T.IDrv.Task:libzigbee"/>
     </TaskDriver>  
-    <TaskDriver> 
-      <driver config="us-s1.anylink.io;8883;us-s1.anylink.io;8883;60;2;0;0;;;;1;-1" n="T.IDrv.Task:libkmqtt"/> 
+    <TaskDriver>
+      <driver config="us-s1.anylink.io;8883;us-s1.anylink.io;8883;60;2;0;0;;;;1;-1" n="T.IDrv.Task:libkmqtt"/>
     </TaskDriver>  
-    <TaskDriver>AnyLink LLC Page 3 | 3 
-      <driver config="1" n="T.IDrv.Task:libtremoteplc"/> 
+    <TaskDriver>AnyLink LLC Page 3 | 3
+      <driver config="1" n="T.IDrv.Task:libtremoteplc"/>
     </TaskDriver>  
-    <TaskDriver> 
-      <driver config="rtu;/dev/ttymxc2;9600;Even;7;1;STANDARD;200;100;20" id="3" n="T.IDrv.Task:libTModbus" version="1.4.3"/> 
-    </TaskDriver> 
+    <TaskDriver>
+      <driver config="rtu;/dev/ttymxc2;9600;Even;7;1;STANDARD;200;100;20" id="3" n="T.IDrv.Task:libTModbus" version="1.4.3"/>
+    </TaskDriver>
   </task>  
-  <model n="ra-model"> 
-    <device id="1023" ip="127.0.0.1" n="ra-device"> 
-      <driver config="1;wlan0;" n="T.IDrv.Task:libtremoteplc"> 
-        <commDataItems> 
+  <model n="ra-model">
+    <device id="1023" ip="127.0.0.1" n="ra-device">
+      <driver config="1;wlan0;" n="T.IDrv.Task:libtremoteplc">
+        <commDataItems>
           <dataItem addr="" config="" freq="120000" id="1" n="CSQ" report="1" rw="0" type="a" vtype=""/>  
           <dataItem addr="" config="" freq="120000" id="2" n="NET-TYPE" report="1" rw="0" type="s" vtype=""/>  
           <dataItem addr="" config="" freq="120000" id="3" n="WAN-IP" report="1" rw="0" type="s" vtype=""/>  
@@ -722,11 +722,11 @@ Anylink.xml structure:
           <dataItem addr="" config="" freq="120000" id="20" n="GPS-LONGITUDE" report="1" rw="0" type="s" vtype=""/>  
           <dataItem addr="" config="" freq="120000" id="21" n="GPS-LATITUDE" report="1" rw="0" type="s" vtype=""/>  
           <dataItem addr="" config="" freq="120000" id="22" n="WIFI-TYPE" report="1" rw="0" type="s" vtype=""/>  
-          <dataItem addr="" config="" freq="120000" id="23" n="WIFI-HIDDEN" report="1" rw="0" type="s" vtype=""/> 
-        </commDataItems> 
-      </driver> 
-    </device> 
-  </model> 
+          <dataItem addr="" config="" freq="120000" id="23" n="WIFI-HIDDEN" report="1" rw="0" type="s" vtype=""/>
+        </commDataItems>
+      </driver>
+    </device>
+  </model>
 </agent>
 ```
 | **Element**                                      | **Attribute** | **Required** | **Description**                                              |
@@ -1293,7 +1293,7 @@ Function: Get user ID
    {
        "status": "100",
        "data": {
-           
+
        }
    }
    {
@@ -1341,7 +1341,7 @@ Function: Get OTA file list uploaded to AnylinkCloud
 
 ```
 {
-    "status": "100", 
+    "status": "100",
     "data": [
         {
             "createTime": 1556446121094,
@@ -1597,7 +1597,7 @@ url: `/user/addUser`
 
 Parameters: JSON
 
-This API will parse the payload and only pickup the fields listed below and discard the others which are not mentioned in the following list. 
+This API will parse the payload and only pickup the fields listed below and discard the others which are not mentioned in the following list.
 
 | Parameters  | Type       | Required | Comment                                          |
 | ----------- | ---------- | -------- | ------------------------------------------------ |
@@ -1652,7 +1652,7 @@ Request type: GET
 
 url: `/user/getTenantUserTree`
 
-Parameters: 
+Parameters:
 
 | Parameters | Type       | Required | Comment                                                      |
 | ---------- | ---------- | -------- | ------------------------------------------------------------ |
@@ -1667,7 +1667,7 @@ Response JSON:
 | msg        | String    | Error message                                                |
 | data       | JSONArray | `created_by` The user id who created this department<br>`created_on` Create time, UNIX time in ms<br>`id` The department id<br>`isadmin`  If this is a user but not department, 0 means ordinary user, 1 means administrator<br>`real_name` Department name<br>`remark` remark<br>`status` 0--disable, 1--enable<br>`type` 0-- user, 1--department<br>`updated_by` User id who last updated this department<br>`updated_on` Last updated time, UNIX time in ms |
 
-Response example: 
+Response example:
 
 ```json
 {
@@ -1697,7 +1697,7 @@ Request type: GET
 
 url: `/currentdata/pagination`
 
-Parameters: 
+Parameters:
 
 | Parameters | Type    | Required | Comment                                        |
 | ---------- | ------- | -------- | ---------------------------------------------- |
@@ -1715,7 +1715,7 @@ Response JSON:
 | msg        | String     | Error message                                                |
 | result     | JSONObject | `data `  JSONArray<br>        `devid`  AnylinkCloud device id<br>        `deviceName` device name<br>        `itemid` dataitem id<br>        `itemname` dataitem name<br>        `alias` dataitem alias<br>        `htime` time of data collection, time string(GMT-4)<br>        `val` current value of data item<br>        `datatype_name` data type<br>        `datatype_id` data type id<br>        `config` dataitem configuration<br>       `readOnly ` 1--the value of the dataitem can be modified through remote control<br>                          0--remote control is not supported<br>       `quality` data quality<br>        <br>`pageInfo` JSONObject<br>        `page`<br>        `perPage`<br>        `total` |
 
-Response example: 
+Response example:
 
 ```json
 {
