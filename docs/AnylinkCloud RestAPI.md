@@ -1745,3 +1745,55 @@ Response example:
     }
 }
 ```
+
+## 34. OTA history
+
+Function: Get Anylink OTA history
+
+Request type: GET
+
+url: `/ota/history`
+
+Parameters: append URL
+
+| Parameters   | Type    | Required | Comment                   |
+| ------------ | ------- | -------- | ------------------------- |
+| token        | String  | Yes      | User token.               |
+| serialNumber | Integer | Yes      | AnyLink box serial number |
+
+Response JSON:
+
+| Parameters | Type      | Comments                                                     |
+| ---------- | --------- | ------------------------------------------------------------ |
+| status     | String    | return code: <br />**100**: successful <br />**103**: parameter error <br />**104**: invalid token <br />**111**: For some other errors, refer to the "msg" value. |
+| msg        | String    | Error message                                                |
+| data       | JSONArray | `id`  <br>`serialNumber` AnyLink box serial number<br>`sessionid`  The sessionid of this OTA record<br>`oldVersion` The version of Anylink before OTA upgrade<br>`newVersion` The version of Anylink after OTA upgrade<br>`startTime`  OTA upgrade time<br>`cmd`  The command send to Anylink for OTA<br>`state` OTA final state<br>`stateCode`  OTA final state code<br>`status`  Stage of Ota completion<br>`statusCode ` Stage code of Ota completion<br>`finished` Has OTA upgrade been completed<br>`finishedTime` OTA completion time |
+
+Response example: 
+
+```json
+{
+    "status":"100",
+    "data":[
+        {
+            "cmd":"{\"csign\":\"b2FPTMMRuMotTN36znMzJChc7fHvtq/ZBKx3irwpPqJbkfO6RubPuMzCeXrN1NhyDFIfyWP/IbYDH2fnEUROKM5aH7R6U/+xVP1J3O81OSMcSdeJYU8p9ohxeiZrVD5gRbjVg+VQGMRynSWqPo6Xw4HKlAfS7fjNQ7HyFmk0I7A=\",\"file\":\"OTA-patch_usa_14-20220131-v020.zip\",\"fsign\":\"51oR5dB9c2S7wkzKOhPNaw==\",\"fsize\":5264444,\"nblock\":330,\"sessionid\":\"1647962509943\",\"type\":0}",
+            "finished":true,
+            "finishedTime":1647962630840,
+            "id":881,
+            "newVersion":"OTA-3.8.1",
+            "oldVersion":"3.7.25",
+            "serialNumber":1800333,
+            "sessionid":"1647962509943",
+            "startTime":1647962510085,
+            "state":"AGENT_OTA_DOWNLOAD_UPDATE_REQUEST_TIMEOUT",
+            "stateCode":1002,
+            "status":"AGENT_OTA_FINISHED",
+            "statusCode":7
+        }
+    ]    
+}
+```
+
+
+
+
