@@ -876,7 +876,7 @@ Prameters: form-data
 | driverVersion | String | Yes      | Driver version                                               |
 | fileName      | String | Yes      | File name of upgrade file, and correct suffix is required.   |
 | fileStream    | File   | Yes      | File stream of upgrade file                                  |
-| anylinkModel  | String | Yes      | Anylink model, such as DA, IE, IE Pro, WINDOWS               |
+| anylinkModel  | String | Yes      | Anylink model, such as DA, IE, IE Pro, WINDOWS, NeuroQ               |
 | description   | String | No       | You can add some useful description information for the driver. |
 | remark        | String | No       |                                                              |
 
@@ -905,7 +905,7 @@ Prameters: append URL
 | driverVersion | String  | No       | Driver version                                               |
 | driverName    | String  | No       | Driver name                                                  |
 | agentVersion  | String  | No       | The agent version for which the upgrade package is applicable. |
-| anylinkModel  | String  | No       | Anylink model, such as DA, IE, IE Pro, WINDOWS               |
+| anylinkModel  | String  | No       | Anylink model, such as DA, IE, IE Pro, WINDOWS,NeuroQ               |
 
 Response: JSON
 
@@ -1386,7 +1386,7 @@ Response JSON:
 | ---------- | ---------- | ------------------------------------------------------------ |
 | status     | String     | return code: <br />**100**: successful <br />**103**: parameter error <br />**104**: invalid token <br />**111**: For some other errors, refer to the "msg" value. |
 | msg        | String     | Error message                                                |
-| data       | JSONObject | `NO` Not meeting OTA upgrade conditions <br />`reason` The reason why OTA cannot be performed. It will be null if the Anylink can perform OTA <br />`condition` 0--AnylinkBox online, 1--AnylinkBox offline <br />`serialNumber` Anylink serial number <br />`anylinkModel` Anylink model, such as `DA` `SE` `IE` `IE Pro` <br />`currentVersion` Current version of agent <br />`OK` List that have passed the pre-check |
+| data       | JSONObject | `NO` Not meeting OTA upgrade conditions <br />`reason` The reason why OTA cannot be performed. It will be null if the Anylink can perform OTA <br />`condition` 0--AnylinkBox online, 1--AnylinkBox offline <br />`serialNumber` Anylink serial number <br />`anylinkModel` Anylink model, such as `DA` `SE` `IE` `IE Pro` `NeuroQ` <br />`currentVersion` Current version of agent <br />`OK` List that have passed the pre-check |
 
 ```
 {
