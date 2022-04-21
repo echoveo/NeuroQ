@@ -112,7 +112,7 @@ Function: Get AnylinkCloud deviceId by serialnumber and device name
 
 Request type: GET
 
-url: /devicelist/getDeviceID
+url: /v2/devicelist/getDeviceID
 
 Parameters: append URL
 
@@ -121,7 +121,7 @@ Parameters: append URL
 | token      | String  | no      | User token                |
 | hash       | String  | yes      | hash (use ‘tetrascience’) |
 | deviceName | String  | yes      | device name               |
-| agentID    | Integer | yes      | serialnumber              |
+| serialNumber    | Integer | yes      | serialnumber              |
 
 Return value: JSON
 
@@ -133,7 +133,7 @@ Return value: JSON
 
 Sample request:
 
-/devicelist/getDeviceID?token=08a67a16-9e96-4bfd-8492-3f415585639c&hash=tetrascience&deviceName=test&agentID=1700631
+/v2/devicelist/getDeviceID?token=08a67a16-9e96-4bfd-8492-3f415585639c&hash=tetrascience&deviceName=test&serialNumber=1700631
 
 Sample response:
 
@@ -398,7 +398,7 @@ Function: Issue the control command to the agent, and the agent uploads the conf
 
 Request type: PUT
 
-url： /remoteAgent/uploadCmd
+url： /v2/remoteAgent/uploadCmd
 
 Parameters: append URL
 
@@ -407,7 +407,7 @@ Parameters: append URL
 | token        | String  | no      | User token            |
 | hash         | String  | yes      | hash（use ‘tetrascience’）                                   |
 | filetype     | String  | yes      | Type of file to upload: anylink_xml(for WIFI config), idinfo_xml alldevicedriver_xml, config_xml |
-| serialnumber | Integer | yes      | AnyLink box serial number                                    |
+| serialNumber | Integer | yes      | AnyLink box serial number                                    |
 
 Return value: JSON
 
@@ -504,7 +504,7 @@ Function: Send configuration file to agent
 
 Request type: POST
 
-url： /remoteAgent/sendAnylinkXML
+url： /v2/remoteAgent/sendAnylinkXML
 
 Parameters: JSON
 
@@ -513,7 +513,7 @@ Parameters: JSON
 | token        | String  | no      | User token        |
 | hash         | String  | yes      | hash（use ‘tetrascience’）                                   |
 | filetype     | String  | yes      | XML file type： anylink_xml(for WIFI config), config_xml (ModuleConfig.xml for agent)    |
-| serialnumber | Integer | yes      | AnyLink box serial number                                    |
+| serialNumber | Integer | yes      | AnyLink box serial number                                    |
 | anylinkType  | String  | no       | For **WIFI** configuration，filetype=”anylink_xml”, anylinkType="WIFI", otherwise leave this empty |
 | content      | String  | yes      | Send content                                                 |
 
@@ -523,7 +523,7 @@ Example for WIFI configuration：
 {
      "token":"8fa07284-661c-4aec-99ad-38e894c8ebe0",
      "filetype":"anylink_xml",
-     "serialnumber":1401868,
+     "serialNumber":1401868,
      "anylinkType": "WIFI",
      "content": "<AnyLink>......</AnyLink>"
 }
@@ -534,7 +534,7 @@ Example for config_xml：
 ```
 {
      "filetype":"config_xml",
-     "serialnumber":1401868,
+     "serialNumber":1401868,
      "token":"8fa07284-661c-4aec-99ad-38e894c8ebe0",
      "content":"<agent ......</agent>"
 }
@@ -962,21 +962,21 @@ Function: Get current online/offline status of IoT boxes
 
 Request type: POST
 
-url: /agentList/condition
+url: /v2/agentList/condition
 
 Prameters: JSON
 
 | Parameters | Type      | Required | Comment                                        |
 | ---------- | --------- | -------- | ---------------------------------------------- |
 | token      | String    | No      | User token |
-| agentIds   | JSONArray | Yes      | An Array of IoT boxes' Serial Numbers          |
+| serialNumbers   | JSONArray | Yes      | An Array of IoT boxes' Serial Numbers          |
 
 Sample request:
 
 ```
 {
     "token": "805b2b68-0f3b-47c2-a57a-0401d2f2b95c",
-    "agentIds":[
+    "serialNumbers":[
         1701354,
         1701178
     ]
@@ -989,18 +989,18 @@ Response JSON:
 | ---------- | --------- | ------------------------------------------------------------ |
 | status     | String    | return code: <br />**100**: successful <br />**103**: parameter error<br />**104**: invalid token<br />**111**: For some other errors, refer to the "msg" value. |
 | msg        | String    | Error message                                                |
-| data       | JSONArray | agentid: serialnumber, condition: 0--offline, 1--online      |
+| data       | JSONArray | serialNumber: serialNumber, condition: 0--offline, 1--online      |
 
 ```
 {
     "status": "100",
     "data": [
         {
-            "agentid": 1701178,
+            "serialNumber": 1701178,
             "condition": 0
         },
         {
-            "agentid": 1701354,
+            "serialNumber": 1701354,
             "condition": 1
         }
     ]
@@ -1134,7 +1134,7 @@ Response JSON:
                 "id": 3,
                 "device_id": 1535998977,
                 "name": "Monitor_Test",
-                "serialnumber": "1499999"
+                "serialNumber": "1499999"
             }
         ]
     }
@@ -1603,7 +1603,7 @@ This API will parse the payload and only pickup the fields listed below and disc
 | ----------- | ---------- | -------- | ------------------------------------------------------------ |
 | token       | String     | No      | User token                                                   |
 | param       | JSONObject | Yes      |                                                              |
-| user_name   | String     | Yes      | User name, used to login. Length should between 2-22. And it can only consist of upper and lower case letters + numbers + underscores. (Regular expression /^[a-zA-Z0-9_]+$/) |
+| user_name   | String     | Yes      | User name, used to login. Length should between 2-22. And it can only consist of upper and lower case letters, numbers, underscores and hyphens. (Regular expression /^[a-zA-Z0-9_-]+$/) |
 | password    | String     | Yes      | Password should be between 5-16 characters. Including at least one digit, one uppercase letter, one lowercase letter and one special symbol `!@#&%()–[{}]:;',?/*~$^+=<>` |
 | re_password | String     | Yes      | Enter the password again                                     |
 | real_name   | String     | Yes      | Real name. The max length is 50.                             |
