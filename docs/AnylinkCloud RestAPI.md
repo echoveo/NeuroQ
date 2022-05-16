@@ -882,7 +882,7 @@ Function: Get the driver list uploaded to AnylinkCloud.
 
 Request type: GET
 
-url： /rdd/rddVersionList
+url： /v2/rdd/rddVersionList
 
 Prameters: append URL
 
