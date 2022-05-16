@@ -32,7 +32,6 @@ Parameters:  JSON
 | tenantEname | String | Yes      | Tenant name        |
 | name        | String | Yes      | Tenant user name   |
 | password    | String | Yes      | Password           |
-| hash        | String | Yes      | Use ‘tetrascience’ |
 
 Return value:  JSON    
 
@@ -48,8 +47,7 @@ Sample request:
 {
     "tenantEname": "tetrascience",
     "name": "admin",
-    "password": "123456",
-    "hash": "tetrascience"
+    "password": "123456"
 }
 ```
 
@@ -86,10 +84,9 @@ Parameters: append URL
 | Parameters | Type   | Required | Comment                                                    |
 | ---------- | ------ | -------- | ---------------------------------------------------------- |
 | token      | String | no      | User token |
-| hash       | String | yes      | hash code                                                  |
 | password   | String | yes      | new password                                               |
 
-Sample request： /user/password?token=dc91c34b-6a11-437a-ab8e-fa6fdc3e547b&hash=test&password=1234567
+Sample request： /user/password?token=dc91c34b-6a11-437a-ab8e-fa6fdc3e547b&password=1234567
 
 Return value: JSON
 
@@ -119,7 +116,6 @@ Parameters: append URL
 | Parameters | Type    | Required | Comment                   |
 | ---------- | ------- | -------- | ------------------------- |
 | token      | String  | no      | User token                |
-| hash       | String  | yes      | hash (use ‘tetrascience’) |
 | deviceName | String  | yes      | device name               |
 | serialNumber    | Integer | yes      | serialnumber              |
 
@@ -133,7 +129,7 @@ Return value: JSON
 
 Sample request:
 
-/v2/devicelist/getDeviceID?token=08a67a16-9e96-4bfd-8492-3f415585639c&hash=tetrascience&deviceName=test&serialNumber=1700631
+/v2/devicelist/getDeviceID?token=08a67a16-9e96-4bfd-8492-3f415585639c&deviceName=test&serialNumber=1700631
 
 Sample response:
 
@@ -157,7 +153,6 @@ Parameters: JSON
 | Parameters   | Sub Parameters | Type    | Required | Comment                                                      |
 | ------------ | -------------- | ------- | -------- | ------------------------------------------------------------ |
 | token        |                | String  | no      | User token              |
-| hash         |                | String  | yes      | hash is not used for now（use ‘tetrascience’ as example and null is OK too） |
 | serialNumber |                | Integer | yes      | AnyLink box serial number                                    |
 | deviceId     |                | Integer | yes      | Anylink cloud device id. This value must be configured with libTetraSerialCmd driver. |
 | driverName   |                | String  | yes      | Driver name, the value is libTetraSerialCmd, cannot be other values. |
@@ -189,7 +184,6 @@ Sample request:
 ```
 {
     "token":"f53073f3-ef67-4bb5-a152-eab3f3139331",
-    "hash":"1234",
     "serialNumber":1700631,
     "deviceId":1741446148,
     "driverName":"libTetraSerialCmd",
@@ -332,7 +326,6 @@ Parameters: append URL
 | Parameters | Type    | Required | Comment                                                      |
 | ---------- | ------- | -------- | ------------------------------------------------------------ |
 | token      | String  | no      | User token.                                                  |
-| hash       | String  | yes      | hash（use ‘tetrascience’）                                   |
 | deviceid   | Integer | yes      | AnylinkCloud device id                                       |
 | dataitemid | String  | yes      | AnylinkCloud dataitem id                                     |
 | stime      | Long    | no       | Start time, UTC timestamp in `milliseconds`. If this value is empty, the default value is 12 hours before the current time. |
@@ -354,7 +347,7 @@ Return value: JSON
 | datatype   | String  | data type, e.g 'a', 'b', 's'                                 |
 | readOnly   | Boolean | true: read-only, false: writable                             |
 
-Sample request: /historydata?token=fd361aec-6173-4518-8b89-09c21565af52&deviceid=1435394049&dataitemid=1&hash=test&stime=1536570000000&etime=1536573600000
+Sample request: /historydata?token=fd361aec-6173-4518-8b89-09c21565af52&deviceid=1435394049&dataitemid=1&stime=1536570000000&etime=1536573600000
 
 Sample Response:
 
@@ -405,7 +398,6 @@ Parameters: append URL
 | Parameters   | Type    | Required | Comment                                                      |
 | ------------ | ------- | -------- | ------------------------------------------------------------ |
 | token        | String  | no      | User token            |
-| hash         | String  | yes      | hash（use ‘tetrascience’）                                   |
 | filetype     | String  | yes      | Type of file to upload: anylink_xml(for WIFI config), idinfo_xml alldevicedriver_xml, config_xml |
 | serialNumber | Integer | yes      | AnyLink box serial number                                    |
 
@@ -446,7 +438,6 @@ Parameters: append URL
 | Parameters | Type   | Require | Comment                                                      |
 | ---------- | ------ | ------- | ------------------------------------------------------------ |
 | token      | String | no     | User token              |
-| hash       | String | yes     | hash（use ‘tetrascience’）                                   |
 | sign       | String | yes     | Get the result for the command，this is the data value from API "/remoteAgent/uploadCmd" |
 
 Return value: JSON
@@ -477,7 +468,6 @@ Parameters: append URL
 | Parameters   | Value   | Required | Comments                                                 |
 | ------------ | ------- | -------- | -------------------------------------------------------- |
 | token        | String  | no      | User token         |
-| hash         | String  | yes      | hash（use ‘tetrascience’）                               |
 | xmlType      | String  | yes      | XML file type： anylink_xml(for WIFI config), config_xml |
 | serialNumber | Integer | yes      | AnyLink box serial number                                |
 
@@ -511,7 +501,6 @@ Parameters: JSON
 | Parameters   | Value   | Required | Comments                                                     |
 | ------------ | ------- | -------- | ------------------------------------------------------------ |
 | token        | String  | no      | User token        |
-| hash         | String  | yes      | hash（use ‘tetrascience’）                                   |
 | filetype     | String  | yes      | XML file type： anylink_xml(for WIFI config), config_xml (ModuleConfig.xml for agent)    |
 | serialNumber | Integer | yes      | AnyLink box serial number                                    |
 | anylinkType  | String  | no       | For **WIFI** configuration，filetype=”anylink_xml”, anylinkType="WIFI", otherwise leave this empty |
@@ -904,7 +893,7 @@ Prameters: append URL
 | perPage       | Integer | No       | Number of data per page. Default value is "10"               |
 | driverVersion | String  | No       | Driver version                                               |
 | driverName    | String  | No       | Driver name                                                  |
-| agentVersion  | String  | No       | The agent version for which the upgrade package is applicable. |
+| anylinkVersion  | String  | No       | The agent version for which the upgrade package is applicable. |
 | anylinkModel  | String  | No       | Anylink model, such as DA, IE, IE Pro, WINDOWS,NeuroQ               |
 
 Response: JSON
@@ -1216,7 +1205,6 @@ Function: Get device list
 | Parameters   | Type    | Required | Comment                                                      |
 | ------------ | ------- | -------- | ------------------------------------------------------------ |
 | token        | String  | No      | User token          |
-| hash         | String  | No       | 'tetrascience'                                               |
 | serialNumber | Integer | No       | AnyLink box serial number. If it is null, API will return all the devices in permission of this token. |
 
  Response JSON:
