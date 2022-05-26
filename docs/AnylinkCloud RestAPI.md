@@ -882,7 +882,7 @@ Function: Get the driver list uploaded to AnylinkCloud.
 
 Request type: GET
 
-url： /rdd/rddVersionList
+url： /v2/rdd/rddVersionList
 
 Prameters: append URL
 
@@ -894,6 +894,7 @@ Prameters: append URL
 | driverVersion | String  | No       | Driver version                                               |
 | driverName    | String  | No       | Driver name                                                  |
 | anylinkVersion  | String  | No       | The agent version for which the upgrade package is applicable. |
+| agentVersion  | String  | No       | This parameter will take effect in 4.2.13. The agent version for which the upgrade package is applicable. |
 | anylinkModel  | String  | No       | Anylink model, such as DA, IE, IE Pro, WINDOWS,NeuroQ               |
 
 Response: JSON
