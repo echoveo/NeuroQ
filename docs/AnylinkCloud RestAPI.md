@@ -1124,14 +1124,64 @@ Response JSON:
                 "id": 3,
                 "device_id": 1535998977,
                 "name": "Monitor_Test",
-                "serialNumber": "1499999"
+                "serialnumber": "1499999"
             }
         ]
     }
 }
 ```
 
-## 22. Associate devices to a user
+## 22. Get list of devices not bound to a user
+
+ Function: Get list of devices not bound to a user
+
+ Request type: GET
+
+ url: `/userDevice/restListByPagination`
+
+ Prameters: append URL
+
+| Parameters   | Type    | Required | Comment                                                      |
+| ------------ | ------- | -------- | ------------------------------------------------------------ |
+| token        | String  | No      | User token                    |
+| userId       | Integer | No       | The `userId` to get the device list. If `userId` is null, it will be the id of the user corresponding to the `token`. |
+| serialNumber | Integer | No       | Anylink serial number                                        |
+| deviceName   | String  | No       | device name                                                  |
+| page         | Integer | Yes      | Page number, starting from 1                                 |
+| perPage      | Integer | Yes      | Number of data per page                                      |
+
+ Response JSON:
+
+| Parameters | Type       | Comments                                                     |
+| ---------- | ---------- | ------------------------------------------------------------ |
+| status     | String     | return code: <br />**100**: successful, <br />**103**: parameter error <br />**104**: invalid token <br />**111**: For some other errors, refer to the "msg" value. |
+| msg        | String     | Error message                                                |
+| result     | JSONObject | `pageInfo`  <br />     `page` Page number, starting from 1   <br />     `perPage` Number of data per page   <br />     `total` Total number of data pieces <br />`data` JSONArray   <br />     `device_id` AnylinkCloud device id   <br />     `name` Device name   <br />     `serialnumber` Anylink serial number |
+
+```
+{
+    "status": "100",
+    "result": {
+        "pageInfo": {
+            "page": 1,
+            "perPage": 10,
+            "total": 1
+        },
+        "data": [
+            {
+                "device_id": 1535998977,
+                "name": "Monitor_Test",
+                "serialnumber": "1499999"
+            }
+        ]
+    }
+}
+```
+
+
+
+
+## 23. Associate devices to a user
 
  Function: Associate devices to a user
 
@@ -1162,7 +1212,7 @@ Response JSON:
 }
 ```
 
-## 23. Remove device from user
+## 24. Remove device from user
 
 Function: Remove device from a user
 
@@ -1193,7 +1243,7 @@ Function: Remove device from a user
 }
 ```
 
-## 24. Get device list
+## 25. Get device list
 
 Function: Get device list
 
@@ -1253,7 +1303,7 @@ Function: Get device list
 
 
 
-## 25. Get user ID by user name
+## 26. Get user ID by user name
 
 Function: Get user ID
 
@@ -1306,7 +1356,7 @@ Function: Get user ID
    }
 ```
 
-## 26. Get OTA file list
+## 27. Get OTA file list
 
 Function: Get OTA file list uploaded to AnylinkCloud
 
@@ -1345,7 +1395,7 @@ Function: Get OTA file list uploaded to AnylinkCloud
 }
 ```
 
-## 27. OTA Pre-Check
+## 28. OTA Pre-Check
 
 Function: Before initiating OTA, check whether the gateway supports OTA
 
@@ -1402,7 +1452,7 @@ Response JSON:
 }
 ```
 
-## 28. Get the list of upgradeable versions
+## 29. Get the list of upgradeable versions
 
 Function: Get the list of upgradeable versions
 
@@ -1453,7 +1503,7 @@ Response JSON:
 }
 ```
 
-## 29. Start OTA for an AnylinkBox
+## 30. Start OTA for an AnylinkBox
 
 Function: Start OTA for an AnylinkBox
 
@@ -1505,7 +1555,7 @@ Response JSON:
 }
 ```
 
-## 30. Get OTA status
+## 31. Get OTA status
 
 Function: Get OTA status
 
@@ -1576,7 +1626,7 @@ OTA state code:
 
 
 
-## 31. Add user
+## 32. Add user
 
 Function: Add a user
 
@@ -1633,7 +1683,7 @@ Response JSON:
 | data       | Integer | Newly added user id                                          |
 
 
-## 32. List all the departments
+## 33. List all the departments
 
 Function: List all the departments
 
@@ -1678,7 +1728,7 @@ Response example:
 }
 ```
 
-## 33. Get device current data list
+## 34. Get device current data list
 
 Function: Get device current data list
 
@@ -1735,7 +1785,7 @@ Response example:
 }
 ```
 
-## 34. OTA history
+## 35. OTA history
 
 Function: Get Anylink OTA history
 
