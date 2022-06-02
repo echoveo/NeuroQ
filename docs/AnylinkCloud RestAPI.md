@@ -893,9 +893,8 @@ Prameters: append URL
 | perPage       | Integer | No       | Number of data per page. Default value is "10"               |
 | driverVersion | String  | No       | Driver version                                               |
 | driverName    | String  | No       | Driver name                                                  |
-| anylinkVersion  | String  | No       | The agent version for which the upgrade package is applicable. |
-| agentVersion  | String  | No       | This parameter will take effect in 4.2.13. The agent version for which the upgrade package is applicable. |
-| anylinkModel  | String  | No       | Anylink model, such as DA, IE, IE Pro, WINDOWS,NeuroQ               |
+| anylinkVersion  | String  | No       | The following formats will be supported in this parameter: <br/> 1. one agent version, i.e. `3.7.25`  <br/>  2. range of agent versions, i.e. `3.7.25-3.7.27`, which includes `3.7.25`, `3.7.26` and `3.7.27` three versions.   <br/>  3. range of agent versions with open end, i.e. `3.7.25-`, which includes `3.7.25`, `3.7.26` and later versions. |
+| anylinkModel  | String  | No       | Anylink model, such as DA, IE, IE Pro, WINDOWS,NeuroQ       |
 
 Response: JSON
 
