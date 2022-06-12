@@ -1756,7 +1756,7 @@ Parameters: append URL
 | deviceId   | Integer | Yes      | AnylinkCloud device id                         |
 | itemName   | String  | No       | Dataitem name                                  |
 | page       | Integer | Yes      | Page number, starting from 1.                  |
-| perPage    | Integer | Yest     | Number of data per page.                       |
+| perPage    | Integer | Yes     | Number of data per page.                       |
 
 Response JSON:
 
