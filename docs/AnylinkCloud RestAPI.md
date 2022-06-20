@@ -1029,24 +1029,27 @@ Response JSON:
 | ---------- | --------- | ------------------------------------------------------------ |
 | status     | String    | return code: <br />**100**: successful, <br />**103**: parameter error <br />**104**: invalid token<br />**111**: For some other errors, refer to the "msg" value. |
 | msg        | String    | Error message                                                |
-| data       | JSONArray | **agentCondition**: online/offline status, <br />     0--offline <br />     1--online <br />**deviceList**: devices that belong to the gateway <br />**serialNumber**: agent serial number |
+| data       | JSONArray | **agentCondition**: online/offline status, <br />     0--offline <br />     1--online <br />**deviceList**: devices that belong to the gateway <br /> `condition`: online/offline status of device. 0--offline, 1--online <br/> `deviceId`: device ID <br/> `deviceName`: device name <br/>**serialNumber**: agent serial number <br/> **anylinkAttributePO**:anylink attribute list, but this is a null list in this API |
 
 ```
 {
     "status":"100",
     "data":[
         {
-            "agentCondition":0,
+            "serialNumber":1801379,
+            "agentCondition":1,
+            "protocol":"mqtt",
+            "anylinkAttributePO":{
+
+            },
             "deviceList":[
                 {
                     "condition":0,
-                    "deviceId":1437705215,
-                    "deviceName":"ra-device",
-                    "serialNumber":"1404008"
+                    "deviceId":1844612196,
+                    "deviceName":"UTG",
+                    "serialNumber":"1801379"
                 }
-            ],
-            "protocol":"mqtt",
-            "serialNumber":1404008
+            ]
         }
     ]
 }
