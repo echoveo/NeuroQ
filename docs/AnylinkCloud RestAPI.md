@@ -867,6 +867,7 @@ Prameters: form-data
 | fileStream    | File   | Yes      | File stream of upgrade file                                  |
 | anylinkModel  | String | Yes      | Anylink model, such as DA, IE, IE Pro, WINDOWS, NeuroQ               |
 | description   | String | No       | You can add some useful description information for the driver. |
+| driverMD5     | String | No       | The md5sum value of the driver `.so` file.                      |
 | remark        | String | No       |                                                              |
 
 Response: JSON
@@ -895,6 +896,8 @@ Prameters: append URL
 | driverName    | String  | No       | Driver name                                                  |
 | agentVersion  | String  | No       | The following formats will be supported in this parameter: <br/> 1. one agent version, i.e. `3.7.25`  <br/>  2. range of agent versions, i.e. `3.7.25-3.7.27`, which includes `3.7.25`, `3.7.26` and `3.7.27` three versions.   <br/>  3. range of agent versions with open end, i.e. `3.7.25-`, which includes `3.7.25`, `3.7.26` and later versions. |
 | anylinkModel  | String  | No       | Anylink model, such as DA, IE, IE Pro, WINDOWS,NeuroQ       |
+| driverMD5     | String  | No       | The md5sum value of the driver `.so` file.                      |
+
 
 Response: JSON
 
@@ -904,7 +907,7 @@ Response: JSON
 | msg       |  | String | Error message                                                |
 | result    |  | JSONObject|                                                           |
 |           |pageInfo| JSONObject | `page`:Page number<br> `perPage`:Number of data per page<br> `total`:Total number of data pieces<br>  |
-|           |data| JSONArray| `agentVersion`: Applicable agent version of the driver<br>  `anylinkModel`:Anylink model, such as `DA`, `IE`, `IE Pro`, `WINDOWS`, `NeuroQ` <br>  `driverName`: Driver name<br> `driverVersion`: Driver version<br>  `fileName`: Driver zip file name<br>  `filePath`:File storage path on disk <br>  `fsign`:The md5 hash of the driver zip file<br> `createTime`: The first time this driver file uplaoded<br>  `updateTime`: The last time this driver file changed  |
+|           |data| JSONArray| `agentVersion`: Applicable agent version of the driver<br>  `anylinkModel`:Anylink model, such as `DA`, `IE`, `IE Pro`, `WINDOWS`, `NeuroQ` <br>  `driverName`: Driver name<br> `driverVersion`: Driver version<br>  `fileName`: Driver zip file name<br>  `filePath`:File storage path on disk <br>  `fsign`:The md5 hash of the driver zip file<br> `driverMD5`: The md5sum value of the driver `.so` file.<br/> `createTime`: The first time this driver file uplaoded<br>  `updateTime`: The last time this driver file changed  |
 ```
 {
     "status": "100",
@@ -924,6 +927,7 @@ Response: JSON
                 "fileName": "libTMX200_IE Pro_1.0.3_3.7.21-.zip",
                 "filePath": "/usr/apps/sdmconfig-new/rdd/IE Pro/libTMX200_IE Pro_1.0.3_3.7.21-.zip",
                 "fsign": "Ffq86EfAvowLB4tqcF7r7A==",
+		"driverMD5": "eac25043df41cd71cec313311252bfc7",
                 "createTime": 1654698404272,
                 "updateTime": 1654698404272
             }
@@ -1146,9 +1150,9 @@ Response JSON:
 }
 ```
 
-## 22. Get list of devices not bound to a user
+## 22. Get the list of devices that a user has not bound
 
- Function: Get list of devices not bound to a user
+ Function: Get the list of devices that a user has not bound
 
  Request type: GET
 
@@ -1194,6 +1198,51 @@ Response JSON:
 ```
 
 
+## 23. Get the device list without binding any users
+
+ Function: Get the device list without binding any users
+
+ Request type: GET
+
+ url: `/userDevice/deviceListNotBindToUser`
+
+ Prameters: append URL
+
+| Parameters   | Type    | Required | Comment                                                      |
+| ------------ | ------- | -------- | ------------------------------------------------------------ |
+| token        | String  | No      | User token                    |
+| serialNumber | Integer | No       | Anylink serial number                                        |
+| deviceName   | String  | No       | device name                                                  |
+| page         | Integer | No      | Page number, starting from 1. Default value is 1              |
+| perPage      | Integer | No      | Number of data per page. Default value is 10                  |
+
+ Response JSON:
+
+| Parameters | Type       | Comments                                                     |
+| ---------- | ---------- | ------------------------------------------------------------ |
+| status     | String     | return code: <br />**100**: successful, <br />**103**: parameter error <br />**104**: invalid token <br />**111**: For some other errors, refer to the "msg" value. |
+| msg        | String     | Error message                                                |
+| result     | JSONObject | `pageInfo`  <br />     `page` Page number, starting from 1   <br />     `perPage` Number of data per page   <br />     `total` Total number of data pieces <br />`data` JSONArray   <br />     `device_id` AnylinkCloud device id   <br />     `name` Device name   <br />     `serialnumber` Anylink serial number |
+
+```
+{
+    "status": "100",
+    "result": {
+        "pageInfo": {
+            "page": 1,
+            "perPage": 10,
+            "total": 1
+        },
+        "data": [
+            {
+                "device_id": 1535998977,
+                "name": "Monitor_Test",
+                "serialnumber": "1499999"
+            }
+        ]
+    }
+}
+```
 
 
 ## 23. Associate devices to a user
@@ -1848,6 +1897,56 @@ Response example:
 }
 ```
 
+## 35. DataItem list of a device
+
+Function: Get dataItem list of a device
+
+Request type: GET
+
+url: `/dataitemlist/pagination`
+
+Parameters: append URL
+
+| Parameters   | Type    | Required | Comment                   |
+| ------------ | ------- | -------- | ------------------------- |
+| token        | String  | No      | User token.               |
+| deviceId | Integer | Yes      | Device id |
+| itemName | Integer | No      | The dataitem name |
+| page     | Integer | No      | Page number, starting from 1. Default value is 1 |
+| perPage  | Integer | No      | Number of data per page. Default value is 10 |
+
+Response JSON:
+
+| Parameters | Type      | Comments                                                     |
+| ---------- | --------- | ------------------------------------------------------------ |
+| status     | String    | return code: <br />**100**: successful <br />**103**: parameter error <br />**104**: invalid token <br />**111**: For some other errors, refer to the "msg" value. |
+| msg        | String    | Error message                                                |
+| data       | JSONArray | `id`  <br>`serialNumber` AnyLink box serial number<br>`sessionid`  The sessionid of this OTA record<br>`oldVersion` The version of Anylink before OTA upgrade<br>`newVersion` The version of Anylink after OTA upgrade<br>`startTime`  OTA upgrade time<br>`cmd`  The command send to Anylink for OTA<br>`state` OTA final state<br>`stateCode`  OTA final state code<br>`status`  Stage of Ota completion<br>`statusCode ` Stage code of Ota completion<br>`finished` Has OTA upgrade been completed<br>`finishedTime` OTA completion time |
+
+Response example: 
+
+```json
+{
+    "status":"100",
+    "data":[
+        {
+            "cmd":"{\"csign\":\"b2FPTMMRuMotTN36znMzJChc7fHvtq/ZBKx3irwpPqJbkfO6RubPuMzCeXrN1NhyDFIfyWP/IbYDH2fnEUROKM5aH7R6U/+xVP1J3O81OSMcSdeJYU8p9ohxeiZrVD5gRbjVg+VQGMRynSWqPo6Xw4HKlAfS7fjNQ7HyFmk0I7A=\",\"file\":\"OTA-patch_usa_14-20220131-v020.zip\",\"fsign\":\"51oR5dB9c2S7wkzKOhPNaw==\",\"fsize\":5264444,\"nblock\":330,\"sessionid\":\"1647962509943\",\"type\":0}",
+            "finished":true,
+            "finishedTime":1647962630840,
+            "id":881,
+            "newVersion":"OTA-3.8.1",
+            "oldVersion":"3.7.25",
+            "serialNumber":1800333,
+            "sessionid":"1647962509943",
+            "startTime":1647962510085,
+            "state":"AGENT_OTA_DOWNLOAD_UPDATE_REQUEST_TIMEOUT",
+            "stateCode":1002,
+            "status":"AGENT_OTA_FINISHED",
+            "statusCode":7
+        }
+    ]    
+}
+```
 
 
 
