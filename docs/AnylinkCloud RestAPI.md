@@ -949,7 +949,7 @@ Prameters: JSON
 | Parameters | Type   | Required | Comment                                        |
 | ---------- | ------ | -------- | ---------------------------------------------- |
 | token      | String | No      | User token |
-| id         | String | Yes      |                                                |
+| id         | String | Yes      | The `id` returned from API /v2/rdd/rddVersionList   |
 
 Response JSON:
 
@@ -959,7 +959,9 @@ Response JSON:
 | msg        | String | Error message                                                |
 
 ```
-{    "status": "100"}
+{    
+    "status": "100"
+}
 ```
 
 # 18. API to get AnyLink IoT box online/offline status
