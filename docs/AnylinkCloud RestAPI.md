@@ -447,6 +447,7 @@ Return value: JSON
 | status    | String | return code: <br />**100**: successful <br />**103**: parameter error <br />**104**: invalid token<br />**111**: For some other errors, refer to the "msg" value. |
 | msg       | String | error message                                                |
 | data      | String | Result（0：success，3：overtime，others：failed）            |
+| adata     | String | It is an extension field used for other functions in AnylinkCloud. This field can be omitted here. |
 
 ```
 {
