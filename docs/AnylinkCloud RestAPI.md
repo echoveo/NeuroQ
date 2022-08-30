@@ -1730,8 +1730,7 @@ Request parameter example:
         "parent_id": "1",
         "cellphone": "123456",
         "email": "gfdgvdf@dfgdfg.dfg",
-        "telephone": 43566212344,
-        "undefined": "435662123dfg",
+        "telephone": "43566212344",
         "isadmin": "0",
         "type": 1
     }
