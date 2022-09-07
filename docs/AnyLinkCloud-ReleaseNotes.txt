@@ -1,0 +1,28 @@
+AnyLink Cloud release notes:
+v4.2.17
+1. Fixed bug: incorrect version displayed at the UI.
+
+v4.2.16
+1. Add validation of the following fields of anylink.xml before sending to agent via /v2/remoteAgent/sendAnylinkXML API call:
+agent.id not empty
+agent.n not empty
+agent/model.n max 256 characters
+agent/model/device.n not empty
+agent/model/device.n max 256 characters
+agent/model/device.id not empty
+agent/model/device/driver.n not empty
+agent/model/device/driver.n max 128 characters
+agent/model/device/driver/commDataItems/dataItem.n not empty
+agent/model/device/driver/commDataItems/dataItem.alias max 128 characters
+agent/model/device/driver/commDataItems/dataItem.id not empty
+agent/model/device/driver/commDataItems/dataItem.type not empty
+agent/model/device/driver/commDataItems/dataItem.type max 128 characters
+agent/model/device/driver/commDataItems/dataItem.freq not empty
+
+2. Add new API to reboot AnyLink IoT box: /agent/reboot
+
+3. Add new API to get DataItem list of a device: https://github.com/anylinkcloud/NeuroQ/blob/main/docs/AnylinkCloud%20RestAPI.md#35-dataitem-list-of-a-device
+
+4. Changed agentVersion to anylinkVersion in driver information.
+
+5. Fixed bug reported by customer:  /agentList response does not show condition for device if no data reported (IOT-194)
