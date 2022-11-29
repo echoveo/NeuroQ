@@ -2061,4 +2061,94 @@ Sample response:
 }
 ```
 
+## 40. Get drivers deployed in Anylink Box
+
+Function: Get drivers deployed in Anylink Box
+
+Request type: GET
+
+url: `/rdd/deployedDriverList`
+
+Parameters: Append URL
+
+| Parameters   | Type    | Required | Comment                   |
+| ------------ | ------- | -------- | ------------------------- |
+| token        | String  | No       | User token.               |
+| serialNumber | Integer | Yes      | AnyLink box serial number |
+| driverName   | String  | No       | The driver name you want to get |
+
+Response JSON:
+
+| Parameters | Type      | Comments                                                     |
+| ---------- | --------- | ------------------------------------------------------------ |
+| status     | String    | return code: <br />**100**: successful <br/> **102**: timeout <br />**103**: parameter error <br />**104**: invalid token <br />**111**: For some other errors, refer to the "msg" value. |
+| data       | JSONArray | Driver info list deploay in Anylink box.<br/> `id`: primary key <br/> `serialNumber`:AnyLink box serial number <br/> `driverName`: driver name <br/> `driverSoMd5`: md5sum value of driver file <br/>   |
+| msg        | String    | Error message                                                |
+
+Sample response:
+```json
+{
+    "status": "100",
+    "data": [
+        {
+	    "id": 22,
+	    "serialNumber": 1800333,
+	    "driverVersion": "",
+            "driverName": "libtremoteplc",
+            "driverSoMd5": "",
+            "createTime": 1669689845047,
+            "updateTime": 1669689845000
+        }
+    ]
+}
+```
+
+## 41. Compare whether the drive information
+
+Function: Compare whether the drive information uploaded by the agent is consistent with the md5sum value of the drive package of AnylinkCloud
+
+Request type: GET
+
+url: `/rdd/checkDriverMd5`
+
+Parameters: Append URL
+
+| Parameters   | Type    | Required | Comment                   |
+| ------------ | ------- | -------- | ------------------------- |
+| token        | String  | No       | User token.               |
+| serialNumber | Integer | Yes      | AnyLink box serial number |
+| driverName   | String  | No       | The driver name you want to get. If this parameter is null, all the driver check result will be returned. |
+
+Response JSON:
+
+| Parameters | Type      | Comments                                                     |
+| ---------- | --------- | ------------------------------------------------------------ |
+| status     | String    | return code: <br />**100**: successful <br/> **102**: timeout <br />**103**: parameter error <br />**104**: invalid token <br />**111**: For some other errors, refer to the "msg" value. |
+| data       | JSONArray |  `driverName`: driver name <br/> `driverVersion`: driver version <br/> `resultCode`: <br> `result`: result description  |
+| msg        | String    | Error message                                                |
+
+Sample response:
+```json
+{
+    "status": "100",
+    "data": [
+        {
+            "driverName": "libTetraSerialCmd",
+            "driverVersion": "1.0.5",
+            "resultCode": 100,
+            "result": "There is no driver for remotely download." 
+        }
+    ]
+}
+```
+**result code**
+| Code       | Comments               |
+| ---------- | ---------------------- | 
+| 100        | The drive md5sum uploaded by the agent is **consistent** with the md5sum value of the server side drive package    | 
+| 101        | The drive md5sum uploaded by the agent is **inconsistent** with the md5sum value of the server side drive package | 
+| 102        | Agent did not upload md5 of the driver   |
+| 103        | There is driver package, but the md5sum of the driver is null in server side.    |
+| 104        | There is no driver package in server side.    |
+
+
 
