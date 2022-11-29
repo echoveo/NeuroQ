@@ -1963,7 +1963,7 @@ Function: Send command to agent to upload agent log
 
 Request type: POST
 
-url: `/agent/command`
+url: <span id="agent-command-api">`/agent/command` </span>
 
 Parameters: JSON
 
@@ -1978,10 +1978,30 @@ Response JSON:
 | Parameters | Type      | Comments                                                     |
 | ---------- | --------- | ------------------------------------------------------------ |
 | status     | String    | return code: <br />**100**: successful <br />**103**: parameter error <br />**104**: invalid token <br />**111**: For some other errors, refer to the "msg" value. |
+| data       | String    | The sessionId of this command                                |
 | msg        | String    | Error message                                                |
 
 
-## 37. turn on/off AnyLink IoT box lockdown mode
+## 37. Get agent log compressed file
+
+Function: Get agent log compressed file
+
+Request type: GET
+
+url: `/agentLog/downLoadAgentLogZipFile`
+
+Parameters: Append URL
+
+| Parameters   | Type    | Required | Comment                   |
+| ------------ | ------- | -------- | ------------------------- |
+| token        | String  | No       | User token.               |
+| serialNumber | Integer | Yes      | AnyLink box serial number |
+| sessionId    | String  | Yes      | The `data` value return by API [`/agent/command`](#agent-command-api) |
+
+Response: OutputStream
+
+
+## 38. turn on/off AnyLink IoT box lockdown mode
 
 Function: turn on/off AnyLink IoT box [lockdown](#terminology-lockdown) mode
 
@@ -2004,7 +2024,7 @@ Response JSON:
 | msg        | String    | Error message                                                |
 
 
-## 38. Get current AnyLink IoT box lockdown mode status
+## 39. Get current AnyLink IoT box lockdown mode status
 
 Function: Get current AnyLink IoT box [lockdown](#terminology-lockdown) mode status
 
