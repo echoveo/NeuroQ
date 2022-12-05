@@ -15,6 +15,10 @@ The following image shows how to add a `Authorization: Bearer [token]` in the he
 ![image-20220212121738282](https://user-images.githubusercontent.com/76909130/153696301-1f0d776d-0e6e-4742-8711-c63c7596f6ff.png)
 
 
+**Starting from AnyLink Cloud version 4.2.18 and AnyLink IoT box firmware version 3.8.12, AnyLink provides an enhanced security mode called Lockdown mode. <br/>**
+<span id="terminology-lockdown">**Terminology:** </span> <br/>
+`Lockdown` mode: in non-lockdown mode, AnyLink IoT box listens on port 22 (SSH), 80 (local web server for configuration) and 53 (DNS). In lockdown mode, AnyLink IoT box shutdowns down all those ports and related applications. There’re two ways to activate lockdown mode on AnyLink IoT box, one is by pressing down RMT button on the box, the other is by using the lockdown REST API. To deactivate lockdown mode, both the API and RMT button must be in off mode. 
+
 
 
 ## 1. Get token for AnylinkCloud UI
@@ -1951,6 +1955,200 @@ Response example:
     }
 }
 ```
+
+
+## 36. Send command to agent to upload agent log
+
+Function: Send command to agent to upload agent log
+
+Request type: POST
+
+url: <span id="agent-command-api">`/agent/command` </span>
+
+Parameters: JSON
+
+| Parameters   | Type    | Required | Comment                   |
+| ------------ | ------- | -------- | ------------------------- |
+| token        | String  | No       | User token.               |
+| serialNumber | Integer | Yes      | AnyLink box serial number |
+| command      | String  | Yes       | `REBOOT` reboot agent <br/>   `CHLOG:400`: change log level of agent <br/> `START_UPLOAD_LOG:120` upload realtime agent log<br/>  `UPLOAD_ LOG_ FILE:*` This command means to upload compressed log files. `*` is `1` to `n`, and `n` is generally `5` by default. If more than 5 log files are configured in Anylink box, `n` is the maximum configuration value, and the maximum configuration value is `999`;<br/> There are three configurations available about `*`: <br/> First, upload a single file and configure a single value, such as `1`, `2`, etc;<br/>  Second, upload multiple files and configure the range values, such as `1-5`. There are five log files from the upload index 1 to 5. The five files are compressed into a zip package for upload;<br/>  Third, `0` can be configured to upload the latest log file.|
+
+Response JSON:
+
+| Parameters | Type      | Comments                                                     |
+| ---------- | --------- | ------------------------------------------------------------ |
+| status     | String    | return code: <br />**100**: successful <br />**103**: parameter error <br />**104**: invalid token <br />**111**: For some other errors, refer to the "msg" value. |
+| data       | String    | The sessionId of this command                                |
+| msg        | String    | Error message                                                |
+
+
+## 37. Get agent log compressed file
+
+Function: Get agent log compressed file
+
+Request type: GET
+
+url: `/agentLog/downLoadAgentLogZipFile`
+
+Parameters: Append URL
+
+| Parameters   | Type    | Required | Comment                   |
+| ------------ | ------- | -------- | ------------------------- |
+| token        | String  | No       | User token.               |
+| serialNumber | Integer | Yes      | AnyLink box serial number |
+| sessionId    | String  | Yes      | The `data` value return by API [`/agent/command`](#agent-command-api) |
+
+Response: OutputStream
+
+
+## 38. turn on/off AnyLink IoT box lockdown mode
+
+Function: turn on/off AnyLink IoT box [lockdown](#terminology-lockdown) mode
+
+Request type: POST
+
+url: `/control/lockdown`
+
+Parameters: JSON
+| Parameters   | Type    | Required | Comment                   |
+| ------------ | ------- | -------- | ------------------------- |
+| token        | String  | No       | User token.               |
+| serialNumber | Integer | Yes      | AnyLink box serial number |
+| lockdown     | Boolean | Yes      | `True` turn on [lockdown](#terminology-lockdown) mode <br/> `false` turn off [lockdown](#terminology-lockdown) mode |
+
+Response JSON:
+| Parameters | Type      | Comments                                                     |
+| ---------- | --------- | ------------------------------------------------------------ |
+| status     | String    | return code: <br />**100**: successful <br/> **102**: timeout <br />**103**: parameter error <br />**104**: invalid token <br />**111**: For some other errors, refer to the "msg" value. |
+| data       | Integer   | 0 -- Control command executed successfully <br/> -1 -- Control command execution failed <br/> 3 -- Control command execution timeout <br/> 6-- Command format is not correct, parse failure <br/> 7 -- Driver registration information not found <br/> 5-- Unkown error|
+| msg        | String    | Error message                                                |
+
+
+## 39. Get current AnyLink IoT box lockdown mode status
+
+Function: Get current AnyLink IoT box [lockdown](#terminology-lockdown) mode status
+
+Request type: GET
+
+url: `/control/lockdown/status`
+
+Parameters: JSON
+
+| Parameters   | Type    | Required | Comment                   |
+| ------------ | ------- | -------- | ------------------------- |
+| token        | String  | No       | User token.               |
+| serialNumber | Integer | Yes      | AnyLink box serial number |
+
+Response JSON:
+
+| Parameters | Type      | Comments                                                     |
+| ---------- | --------- | ------------------------------------------------------------ |
+| status     | String    | return code: <br />**100**: successful <br/> **102**: timeout <br />**103**: parameter error <br />**104**: invalid token <br />**111**: For some other errors, refer to the "msg" value. |
+| data       | Integer   | `software-lockdown` The software [lockdown](#terminology-lockdown) status <br/> `hardware-lockdown` The hardware [lockdown](#terminology-lockdown) status <br/> If one of `software-lockdown` or `hardware-lockdown` value is true, the anylink is locked down. |
+| remark     | String    | Some notes on lockdown status                                |
+| msg        | String    | Error message                                                |
+
+Sample response:
+```json
+{
+    "status":"100",
+    "data":{
+        "software-lockdown": true,
+        "hardware-lockdown": false
+    },
+    "remark":"If one of software-lockdown or hardware-lockdown value is true, the anylink is locked down.",
+    "msg":"error message"
+}
+```
+
+## 40. Get drivers deployed in Anylink Box
+
+Function: Get drivers deployed in Anylink Box
+
+Request type: GET
+
+url: `/rdd/deployedDriverList`
+
+Parameters: Append URL
+
+| Parameters   | Type    | Required | Comment                   |
+| ------------ | ------- | -------- | ------------------------- |
+| token        | String  | No       | User token.               |
+| serialNumber | Integer | Yes      | AnyLink box serial number |
+| driverName   | String  | No       | The driver name you want to get |
+
+Response JSON:
+
+| Parameters | Type      | Comments                                                     |
+| ---------- | --------- | ------------------------------------------------------------ |
+| status     | String    | return code: <br />**100**: successful <br/> **102**: timeout <br />**103**: parameter error <br />**104**: invalid token <br />**111**: For some other errors, refer to the "msg" value. |
+| data       | JSONArray | Driver info list deploay in Anylink box.<br/> `id`: primary key <br/> `serialNumber`:AnyLink box serial number <br/> `driverName`: driver name <br/> `driverSoMd5`: md5sum value of driver file <br/>   |
+| msg        | String    | Error message                                                |
+
+Sample response:
+```json
+{
+    "status": "100",
+    "data": [
+        {
+	    "id": 22,
+	    "serialNumber": 1800333,
+	    "driverVersion": "",
+            "driverName": "libtremoteplc",
+            "driverSoMd5": "",
+            "createTime": 1669689845047,
+            "updateTime": 1669689845000
+        }
+    ]
+}
+```
+
+## 41. Compare whether the drive information
+
+Function: Compare whether the drive information uploaded by the agent is consistent with the md5sum value of the drive package of AnylinkCloud
+
+Request type: GET
+
+url: `/rdd/checkDriverMd5`
+
+Parameters: Append URL
+
+| Parameters   | Type    | Required | Comment                   |
+| ------------ | ------- | -------- | ------------------------- |
+| token        | String  | No       | User token.               |
+| serialNumber | Integer | Yes      | AnyLink box serial number |
+| driverName   | String  | No       | The driver name you want to get. If this parameter is null, all the driver check result will be returned. |
+
+Response JSON:
+
+| Parameters | Type      | Comments                                                     |
+| ---------- | --------- | ------------------------------------------------------------ |
+| status     | String    | return code: <br />**100**: successful <br/> **102**: timeout <br />**103**: parameter error <br />**104**: invalid token <br />**111**: For some other errors, refer to the "msg" value. |
+| data       | JSONArray |  `driverName`: driver name <br/> `driverVersion`: driver version <br/> `resultCode`: <br> `result`: result description  |
+| msg        | String    | Error message                                                |
+
+Sample response:
+```json
+{
+    "status": "100",
+    "data": [
+        {
+            "driverName": "libTetraSerialCmd",
+            "driverVersion": "1.0.5",
+            "resultCode": 100,
+            "result": "There is no driver for remotely download." 
+        }
+    ]
+}
+```
+**result code**
+| Code       | Comments               |
+| ---------- | ---------------------- | 
+| 100        | The drive md5sum uploaded by the agent is **consistent** with the md5sum value of the server side drive package    | 
+| 101        | The drive md5sum uploaded by the agent is **inconsistent** with the md5sum value of the server side drive package | 
+| 102        | Agent did not upload md5 of the driver   |
+| 103        | There is driver package, but the md5sum of the driver is null in server side.    |
+| 104        | There is no driver package in server side.    |
 
 
 
