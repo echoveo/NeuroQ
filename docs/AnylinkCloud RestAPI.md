@@ -2151,4 +2151,75 @@ Sample response:
 | 104        | There is no driver package in server side.    |
 
 
+## 42. Bind serialNumbers to tenant
 
+Function: Bind some serialNumbers to tenant
+
+Request type: POST
+
+url: `/device/bindAgentTenant`
+
+Parameters: Append URL
+
+| Parameters   | Type    | Required | Comment                   |
+| ------------ | ------- | -------- | ------------------------- |
+| token        | String  | No       | User token.               |
+| tenantEname  | String  | Yes      |                           |
+| agentIds     | String  | Yes      | SerialNumbers separated by commas |
+
+Response JSON:
+
+| Parameters | Type      | Comments                                                     |
+| ---------- | --------- | ------------------------------------------------------------ |
+| status     | String    | return code: <br />**100**: successful <br/> **102**: timeout <br />**103**: parameter error <br />**104**: invalid token <br />**111**: For some other errors, refer to the "msg" value. |
+| data       | JSONObject |  `failed`: JSONArray of serialNumbers that failed to bind <br/> `success`: JSONAaary of serialNumbers successfully bound to tenant |
+| msg        | String    | Error message                                                |
+
+Sample response:
+```json
+{
+    "status":"100",
+    "data":{
+        "failed":[
+
+        ],
+        "success":[
+            1400179
+        ]
+    }
+}
+```
+
+43. Unbind serialNumbers and tenant
+Function: Unbind serialNumbers and tenant
+Request type: POST
+url: `/device/deleteAgentTenant`
+Parameters: Append URL
+| Parameters   | Type    | Required | Comment                   |
+| ------------ | ------- | -------- | ------------------------- |
+| token        | String  | No       | User token.               |
+| tenantEname  | String  | Yes      |                           |
+| agentIds     | String  | Yes      | SerialNumbers separated by commas |
+
+Response JSON:
+
+| Parameters | Type      | Comments                                                     |
+| ---------- | --------- | ------------------------------------------------------------ |
+| status     | String    | return code: <br />**100**: successful <br/> **102**: timeout <br />**103**: parameter error <br />**104**: invalid token <br />**111**: For some other errors, refer to the "msg" value. |
+| data       | JSONObject |  `failed`: JSONArray of serialNumber that failed to unbind from tenant <br/> `success`: JSONAaary of serialNumber successfully unbound from tenant |
+| msg        | String    | Error message                                                |
+
+Sample response:
+```json
+{
+    "status":"100",
+    "data":{
+        "failed":[
+
+        ],
+        "success":[
+            1400179
+        ]
+    }
+}
+```
