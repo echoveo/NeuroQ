@@ -2159,11 +2159,11 @@ Request type: POST
 
 url: `/device/bindAgentTenant`
 
-Parameters: Append URL
+Parameters: 
 
 | Parameters   | Type    | Required | Comment                   |
 | ------------ | ------- | -------- | ------------------------- |
-| token        | String  | No       | User token.               |
+| token        | String  | Yes       | User token.               |
 | tenantEname  | String  | Yes      |                           |
 | agentIds     | String  | Yes      | SerialNumbers separated by commas |
 
@@ -2190,14 +2190,19 @@ Sample response:
 }
 ```
 
-43. Unbind serialNumbers and tenant
+## 43. Unbind serialNumbers and tenant
+
 Function: Unbind serialNumbers and tenant
+
 Request type: POST
+
 url: `/device/deleteAgentTenant`
-Parameters: Append URL
+
+Parameters: 
+
 | Parameters   | Type    | Required | Comment                   |
 | ------------ | ------- | -------- | ------------------------- |
-| token        | String  | No       | User token.               |
+| token        | String  | Yes       | User token.               |
 | tenantEname  | String  | Yes      |                           |
 | agentIds     | String  | Yes      | SerialNumbers separated by commas |
 
@@ -2221,5 +2226,34 @@ Sample response:
             1400179
         ]
     }
+}
+```
+
+## 44. Update system user password
+Function: Update system user password
+
+Request type: PUT
+
+url: `/user/password`
+
+Parameters: Append URL
+
+| Parameters   | Type    | Required | Comment                   |
+| ------------ | ------- | -------- | ------------------------- |
+| token        | String  | Yes       | User token.               |
+| userid       | Integer | Yes      |                           |
+| password     | String  | Yes      | New password              |
+
+Response JSON:
+
+| Parameters | Type      | Comments                                                     |
+| ---------- | --------- | ------------------------------------------------------------ |
+| status     | String    | return code: <br />**100**: successful <br/> **102**: timeout <br />**103**: parameter error <br />**104**: invalid token <br />**111**: For some other errors, refer to the "msg" value. |
+| msg        | String    | Error message                                                |
+
+Sample response:
+```json
+{
+    "status":"100"
 }
 ```
