@@ -5,40 +5,40 @@
 Version 3.0.1
 March 23th, 2022
 
-# 1. Connect to IoT box
+# 1. Connect to the IoT box
 
-Connect to IoT box via steps described in section 1.1 or 1.2.
+Connect to the IoT box via the steps described in sections 1.1 or 1.2.
 
 ## 1.1 via WiFi Hotspot
-**Step 1:** Plug power supply to IoT box to power on
+**Step 1:** Connect the IoT box to the power supply and turn it on
 
-**Step 2:** Plug AnyLink USB drive into one of the USB1 on IoT Box
+**Step 2:** Plug the AnyLink USB drive into one of the USB ports (e.g. USB1) 
 
-**Step 3:** Connect your computer to IoT box WiFi Hotspot with SSID/Password specified on your USB drive
+**Step 3:** Connect your computer via the WiFi Hotspot using the SSID / Password specified on your USB drive
 
 ## 1.2 via LAN port
 
-**Step 1** : Connect your PC to LAN port on IoT box using ethernet cable  
+**Step 1** : Connect your PC to the LAN port on the IoT box using an ethernet cable  
 <img src="https://www.anylinkiot.com/doc/NeuroQ-F.JPEG" width = "80" height = "343" alt="" align="center" />  
 
-**Step 2:** Plug power supply to IoT box to power on
+**Step 2:** Connect the IoT box to the power supply and turn it on 
 
 
-# 2. Configure network connection to AnyLink Cloud
-**Step 1** : Open **http://192.168.101.204** in your browser and enter username and password (default is **admin/admin** )
+# 2. Configure the network connection to the AnyLink Cloud
+**Step 1** : Open **http://192.168.101.204** in your browser and enter the username and password (default is **admin/admin** )
 
-**Step 2** : Click **Advanced-\&gt;Agent Config** to configure AnyLink Cloud address in **MQTT Publish** and **MQTT Subscription section** and click **Save** button at the bottom once finished.  
+**Step 2** : Click **Advanced-\&gt;Agent Config** to configure the AnyLink Cloud address in **MQTT Publish** and **MQTT Subscription section** and click the **Save** button at the bottom once finished.  
 <img src="https://www.anylinkiot.com/doc/neuroq-ui1.png" width = "440" height = "250" alt="" align=center />
 
-**Step 3** : Click **Advanced-\&gt;Network Config** to configure your network connection to AnyLink Cloud. Select **Ethernet** if you use **WAN** port on IoT box to connect to AnyLink Cloud, or select **WiFi** if you use WiFi to connect to AnyLink Cloud. If network connection is correct, the upper right corner **Cloud Connection** status will be displayed as **Connected**.  
+**Step 3** : Click **Advanced-\&gt;Network Config** to configure your network connection to the AnyLink Cloud. Select **Ethernet** if you are using the **WAN** port on IoT box to connect, or select **WiFi** if you are connecting via WiFi. If the network connection is correct, the upper right corner **Cloud Connection** status will  display as **Connected**.  
 <img src="https://www.anylinkiot.com/doc/neuroq-ui2.png" width = "440" height = "250" alt="" align=center />
 
-**Step 4:** Login to AnyLink Cloud to make sure your IoT box is registered in the Cloud. You can find serial number of the IoT box on the back side of the box.  
+**Step 4:** Login to AnyLink Cloud to make sure your IoT box is registered. You can find the serial number on the backside of the box.  
 <img src="https://www.anylinkiot.com/doc/NeuroQ-B.JPEG" width = "80" height = "343" alt="" align=center />  
 
-# 3. Configure IoT box to communicate with instrument
+# 3. Configure the IoT box to communicate with an instrument
 
-Once you connect your IoT box to the AnyLink Cloud, you can deploy configuration file from AnyLink Cloud to IoT box via rest API.
+Once you connect your IoT box to the AnyLink Cloud, you can deploy the configuration file via the rest API.
 
 ## 3.1 Sequence diagram
 
@@ -46,10 +46,10 @@ Once you connect your IoT box to the AnyLink Cloud, you can deploy configuration
 
 ## 3.2 Process description
 
-1. Use the API /remoteAgent/sendAnylinkXML (**please refer   [AnyLink Cloud REST API](https://anylinkiot.com/doc/AnylinkCloud%20RestAPI.md) for details**) to send the xml configuration file to anylink
-2. After anylink receives the xml configuration file, it needs to restart to load the new configuration
-3. After anylink restarts, it will reregister to Anylink cloud
-4. Call the interface /agent/register (**please refer   [AnyLink Cloud REST API](https://anylinkiot.com/doc/AnylinkCloud%20RestAPI.md) for details**) for details) to query the registration result of anylink. If anylink is reregistered successfully, it means the xml file be sent successfully and the whole process will end.
+1. Use the API /remoteAgent/sendAnylinkXML (**please refer to  [AnyLink Cloud REST API](https://anylinkiot.com/doc/AnylinkCloud%20RestAPI.md) for details**) to send the xml configuration file to anylink
+2. After anylink receives the xml configuration file, it needs to restart in order to load the new configuration
+3. After anylink restarts, it will reregister to the Anylink cloud
+4. Call the interface /agent/register (**please refer to  [AnyLink Cloud REST API](https://anylinkiot.com/doc/AnylinkCloud%20RestAPI.md) for details**) for details) to check on the registration results. If it was reregistered successfully, it means the xml file will be sent successfully and the process will end.
 
 ## 3.3 Sample code (JAVA)
 
