@@ -2257,3 +2257,103 @@ Sample response:
     "status":"100"
 }
 ```
+
+## 45. Check if the tenant already exists
+
+Function: Get the tenant by `tenantEname`, if tenant related information is returned, it indicates that the tenant already exists.
+
+Request type: GET
+
+url: `/tenants/selectByEname`
+
+Parameters: Append URL
+
+| Parameters   | Type    | Required | Comment                   |
+| ------------ | ------- | -------- | ------------------------- |
+| token        | String  | Yes      | System admin token.       |
+| tenantEName  | Integer | Yes      | Tenant name               |
+
+Response JSON:
+
+| Parameters | Type      | Comments                                                     |
+| ---------- | --------- | ------------------------------------------------------------ |
+| status     | String    | return code: <br />**100**: successful <br/> **102**: timeout <br />**103**: parameter error <br />**104**: invalid token <br />**111**: For some other errors, refer to the "msg" value. |
+| data       | JSONObject| Tenant related information. If data is null, it means this tenant does not exists |
+| msg        | String    | Error message                                                |
+
+Sample response:
+```json
+{
+    "status": "100",
+    "data": {
+        "id": 1,
+        "tenantEname": "anylink",
+        "tenantName": "anylink"
+    }
+}
+```
+
+## 46. Add new tenant
+Function: Add a new tenant. The default user name is `admin@${tenantEname}`, and the default password is `admin`. 
+
+Request type: POST
+
+url: `/tenants/addTenant`
+
+Parameters: 
+
+| Parameters   | Type    | Required | Comment                   |
+| ------------ | ------- | -------- | ------------------------- |
+| token        | String  | Yes      | System admin token.       |
+| tenantEname  | String  | Yes      | Tenant name               |
+| tenantName   | String  | Yes      | Tenant name               |
+
+Response JSON:
+
+| Parameters | Type      | Comments                                                     |
+| ---------- | --------- | ------------------------------------------------------------ |
+| status     | String    | return code: <br />**100**: successful <br/> **102**: timeout <br />**103**: parameter error <br />**104**: invalid token <br />**111**: For some other errors, refer to the "msg" value. |
+| msg        | String    | Error message                                                |
+
+Sample response:
+```json
+{
+    "status":"100",
+    "msg": "Success"
+}
+```
+
+## 47. Tenant list
+
+Function: Tenant list
+
+Request type: GET
+
+url: `/tenants/tenantList`
+
+Parameters: Append URL
+
+| Parameters   | Type    | Required | Comment                   |
+| ------------ | ------- | -------- | ------------------------- |
+| token        | String  | Yes       | System admin token.       |
+
+Response JSON:
+
+| Parameters | Type      | Comments                                                     |
+| ---------- | --------- | ------------------------------------------------------------ |
+| status     | String    | return code: <br />**100**: successful <br/> **102**: timeout <br />**103**: parameter error <br />**104**: invalid token <br />**111**: For some other errors, refer to the "msg" value. |
+| data       | JSONArray | Tenant related information.                                  |
+| msg        | String    | Error message                                                |
+
+Sample response:
+```json
+{
+    "status": "100",
+    "data": [
+        {
+            "tenantEname": "anylink",
+            "tenantName": "anylink",
+        }
+    ]
+}
+```
