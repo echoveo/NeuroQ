@@ -2357,3 +2357,46 @@ Sample response:
     ]
 }
 ```
+
+## 48. Update externalId
+Function: Update the externalId of a serialNumber. 
+
+Request type: POST
+
+url: `/anylinkAttribute/externalId`
+
+Parameters: 
+
+| Parameters   | Type         | Required | Comment                   |
+| -------------- | ---------- | -------- | ------------------------- |
+| token          | String     | No       | User token.               |
+| data           | JSONArray  | Yes      |                           |
+|  serialNumber  | Integer    | Yes      |                           |
+|  externalId    | String     | Yes      |                           |
+
+Response JSON:
+
+| Parameters | Type      | Comments                                                     |
+| ---------- | --------- | ------------------------------------------------------------ |
+| status     | String    | return code: <br />**100**: successful <br/> **102**: timeout <br />**103**: parameter error <br />**104**: invalid token <br />**111**: For some other errors, refer to the "msg" value. |
+| msg        | String    | Error message                                                |
+
+Sample parameters:
+```json
+{
+    "token": "4d2753b5-fa14-4b27-9b45-ceb167fe15e9",
+    "data":[
+        {
+            "serialNumber": 1404060,
+            "externalId": "9dfda4d8-3da3-11eb-a504-40bd32c7c512"
+        }
+    ]
+}
+```
+
+Sample response:
+```json
+{
+    "status":"100"
+}
+```
