@@ -1587,8 +1587,7 @@ Parameters: JSON
 | Parameters    | Type    | Required | Comment                                        |
 | ------------- | ------- | -------- | ---------------------------------------------- |
 | token         | String  | No      | User token                  |
-| serialNumber  | Integer | Yes      | Anylink serial number                          |
-| targetVersion | String  | Yes      | Target version number to upgrade to via OTA    |
+| serialNumbers | JSONArray  | Yes      | `serialNumber`: Anylink serial number </br> `targetVersion`: Target version number to upgrade to via OTA   |
 
 Request parameter example:
 
