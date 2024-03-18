@@ -293,6 +293,8 @@ Response: JSON
 | scriptVersion | String     | script version                                               |
 | webVersion    | String     | web for Anylink configuration                                |
 | serialNumber  | Integer    | AnyLink box serial number                                    |
+| externalId    | String     |                                              |
+
 
 Sample request:
 
@@ -312,7 +314,8 @@ Sample response:
         "agentVersion":"3.7.16",
         "scriptVersion":"2.6.6",
         "serialNumber":1700630,
-        "webVersion":"3.5.4"
+        "webVersion":"3.5.4",
+        "externalId":"93efdf62-96bf-4e15-948f-449ab7946a56"
     }
 }
 ```
@@ -1002,7 +1005,7 @@ Response JSON:
 | ---------- | --------- | ------------------------------------------------------------ |
 | status     | String    | return code: <br />**100**: successful <br />**103**: parameter error<br />**104**: invalid token<br />**111**: For some other errors, refer to the "msg" value. |
 | msg        | String    | Error message                                                |
-| data       | JSONArray | serialNumber: serialNumber, condition: 0--offline, 1--online      |
+| data       | JSONArray | serialNumber: serialNumber, </br> externalId </br> condition: 0--offline, 1--online      |
 
 ```
 {
@@ -1010,10 +1013,12 @@ Response JSON:
     "data": [
         {
             "serialNumber": 1701178,
+            "externalId":"93efdf62-96bf-4e15-948f-449ab7946a56",
             "condition": 0
         },
         {
             "serialNumber": 1701354,
+            "externalId":"93efdf62-96bf-4e15-948f-449ab7946a56",
             "condition": 1
         }
     ]
@@ -1040,7 +1045,7 @@ Response JSON:
 | ---------- | --------- | ------------------------------------------------------------ |
 | status     | String    | return code: <br />**100**: successful, <br />**103**: parameter error <br />**104**: invalid token<br />**111**: For some other errors, refer to the "msg" value. |
 | msg        | String    | Error message                                                |
-| data       | JSONArray | **agentCondition**: online/offline status, <br />     0--offline <br />     1--online <br />**deviceList**: devices that belong to the gateway <br /> `condition`: online/offline status of device. 0--offline, 1--online <br/> `deviceId`: device ID <br/> `deviceName`: device name <br/>**serialNumber**: agent serial number <br/> **anylinkAttributePO**:anylink attribute list, but this is a null list in this API |
+| data       | JSONArray |**agentCondition**: online/offline status, <br />     0--offline <br />     1--online <br />**deviceList**: devices that belong to the gateway <br /> `condition`: online/offline status of device. 0--offline, 1--online <br/> `deviceId`: device ID <br/> `deviceName`: device name <br/>**serialNumber**: agent serial number <br/> **externalId**  <br/> **anylinkAttributePO**:anylink attribute list, but this is a null list in this API |
 
 ```
 {
@@ -1048,6 +1053,7 @@ Response JSON:
     "data":[
         {
             "serialNumber":1801379,
+            "externalId": "93efdf62-96bf-4e15-948f-449ab7946a56",
             "agentCondition":1,
             "protocol":"mqtt",
             "anylinkAttributePO":{
@@ -1078,7 +1084,7 @@ Prameters: append URL
 
 | Parameters   | Type    | Required | Comment                                        |
 | ------------ | ------- | -------- | ---------------------------------------------- |
-| token        | String  | No      | User token  |
+| token        | String  | No       | User token                                     |
 | serialNumber | Integer | Yes      |                                                |
 
 Response JSON:
@@ -1087,7 +1093,7 @@ Response JSON:
 | ---------- | --------- | ------------------------------------------------------------ |
 | status     | String    | return code: <br />**100**: successful, <br />**103**: parameter error <br />**104**: invalid token <br />**111**: For some other errors, refer to the "msg" value. |
 | msg        | String    | Error message                                                |
-| data       | JSONArray | **agent_name**: agent name <br />**agentxml**: ModuleConfig.xml content agent uploads when it register to AnylinkCLoud. Detailed introduction of ModuleConfig.xml configuration [click here](https://github.com/tetrascience/ts-anylink-shared/blob/master/Documents/Configuration/ModuleConfig.xml-description.pdf) <br />**condition**: online/offline status, 0--offline, 1--online <br />**createtime**: The first time(ms) agent registered to AnylinkCloud <br />**id**: serial number <br />**protocol**: Data transmission protocol, e.g "http", "mqtt" <br />**updatetime**：The last time(ms) agent registered to AnylinkCloud <br />**version_detail**: agent version |
+| data       | JSONArray | **agent_name**: agent name <br />**agentxml**: ModuleConfig.xml content agent uploads when it register to AnylinkCLoud. Detailed introduction of ModuleConfig.xml configuration [click here](https://github.com/tetrascience/ts-anylink-shared/blob/master/Documents/Configuration/ModuleConfig.xml-description.pdf) <br />**condition**: online/offline status, 0--offline, 1--online <br />**createtime**: The first time(ms) agent registered to AnylinkCloud <br />**id**: serial number <br />**externalId**:  <br />**protocol**: Data transmission protocol, e.g "http", "mqtt" <br />**updatetime**：The last time(ms) agent registered to AnylinkCloud <br />**version_detail**: agent version |
 
 ```
 {
@@ -1099,6 +1105,7 @@ Response JSON:
         "condition":0,
         "createtime":1609294261277,
         "id":1701178,
+        "externalId":"93efdf62-96bf-4e15-948f-449ab7946a56",
         "protocol":"mqtt",
         "updatetime":1627177971998,
         "version_detail":"3.7.17"
@@ -1134,7 +1141,7 @@ Response JSON:
 | ---------- | ---------- | ------------------------------------------------------------ |
 | status     | String     | return code: <br />**100**: successful, <br />**103**: parameter error <br />**104**: invalid token <br />**111**: For some other errors, refer to the "msg" value. |
 | msg        | String     | Error message                                                |
-| result     | JSONObject | `pageInfo`  <br />     `page` Page number, starting from 1   <br />     `perPage` Number of data per page   <br />     `total` Total number of data pieces <br />`data` JSONArray   <br />     `id`    <br />     `device_id` AnylinkCloud device id   <br />     `name` Device name   <br />     `serialnumber` Anylink serial number |
+| result     | JSONObject | `pageInfo`  <br />     `page` Page number, starting from 1   <br />     `perPage` Number of data per page   <br />     `total` Total number of data pieces <br />`data` JSONArray   <br />     `id`    <br />     `device_id` AnylinkCloud device id   <br />     `name` Device name   <br />     `serialnumber` Anylink serial number    <br />     `externalId`  |
 
 ```
 {
@@ -1150,7 +1157,8 @@ Response JSON:
                 "id": 3,
                 "device_id": 1535998977,
                 "name": "Monitor_Test",
-                "serialnumber": "1499999"
+                "serialnumber": "1499999",
+                "externalId":"93efdf62-96bf-4e15-948f-449ab7946a56"
             }
         ]
     }
@@ -1182,7 +1190,7 @@ Response JSON:
 | ---------- | ---------- | ------------------------------------------------------------ |
 | status     | String     | return code: <br />**100**: successful, <br />**103**: parameter error <br />**104**: invalid token <br />**111**: For some other errors, refer to the "msg" value. |
 | msg        | String     | Error message                                                |
-| result     | JSONObject | `pageInfo`  <br />     `page` Page number, starting from 1   <br />     `perPage` Number of data per page   <br />     `total` Total number of data pieces <br />`data` JSONArray   <br />     `device_id` AnylinkCloud device id   <br />     `name` Device name   <br />     `serialnumber` Anylink serial number |
+| result     | JSONObject | `pageInfo`  <br />     `page` Page number, starting from 1   <br />     `perPage` Number of data per page   <br />     `total` Total number of data pieces <br />`data` JSONArray   <br />     `device_id` AnylinkCloud device id   <br />     `name` Device name   <br />     `serialnumber` Anylink serial number    <br />     `externalId` |
 
 ```
 {
@@ -1197,7 +1205,8 @@ Response JSON:
             {
                 "device_id": 1535998977,
                 "name": "Monitor_Test",
-                "serialnumber": "1499999"
+                "serialnumber": "1499999",
+                "externalId":"93efdf62-96bf-4e15-948f-449ab7946a56"
             }
         ]
     }
@@ -1229,7 +1238,7 @@ Response JSON:
 | ---------- | ---------- | ------------------------------------------------------------ |
 | status     | String     | return code: <br />**100**: successful, <br />**103**: parameter error <br />**104**: invalid token <br />**111**: For some other errors, refer to the "msg" value. |
 | msg        | String     | Error message                                                |
-| result     | JSONObject | `pageInfo`  <br />     `page` Page number, starting from 1   <br />     `perPage` Number of data per page   <br />     `total` Total number of data pieces <br />`data` JSONArray   <br />     `device_id` AnylinkCloud device id   <br />     `name` Device name   <br />     `serialnumber` Anylink serial number |
+| result     | JSONObject | `pageInfo`  <br />     `page` Page number, starting from 1   <br />     `perPage` Number of data per page   <br />     `total` Total number of data pieces <br />`data` JSONArray   <br />     `device_id` AnylinkCloud device id   <br />     `name` Device name   <br />     `serialnumber` Anylink serial number   <br />     `externalId`   |
 
 ```
 {
@@ -1244,7 +1253,8 @@ Response JSON:
             {
                 "device_id": 1535998977,
                 "name": "Monitor_Test",
-                "serialnumber": "1499999"
+                "serialnumber": "1499999",
+                "externalId":"93efdf62-96bf-4e15-948f-449ab7946a56"
             }
         ]
     }
@@ -1334,7 +1344,7 @@ Function: Get device list
 | Parameters | Type      | Comments                                                     |
 | ---------- | --------- | ------------------------------------------------------------ |
 | status     | String    | return code: <br />**100**: successful <br />**103**: parameter error <br />**104**: invalid token <br />**111**: For some other errors, refer to the "msg" value. |
-| data       | JSONArray | `id`:  device ID<br/>`name`: device name<br/>`serialNumber`: device serial number<br/>`deviceAttributes` device attributes<br>`lastContact`: last contact time,  time string(GMT-4)<br/>`lastRegister`: agent last registration time, time string(GMT-4)<br/>`pingRate` not in use<br>`deviceCondition`: device condition，1--device is uploading data，0/null--device is not uploading data within "5*data frequency"<br/>`description` some description infomation<br>`channel` device channel for Anylink SE <br>`channelName` device channel name for Anylink SE<br>`isActive` not in use<br>`protocol` not in use<br>`userGroupName` not in use<br>`userGroupId` not in use<br>`version`: agent version<br/>`vpnVersion`: vpn version supported in the agent<br/>`deviceModel`: <br/>      `id: `device model ID<br/>      `name`: device model name<br>      `alias`:  device model alias<br>      `manufacturer`: not in use<br>      `description`: some description infomation |
+| data       | JSONArray | `id`:  device ID<br/>  `name`: device name<br/>  `serialNumber`: device serial number<br/>  `externalId`: <br/>  `deviceAttributes` device attributes<br>   `lastContact`: last contact time,  time string(GMT-4)<br/>   `lastRegister`: agent last registration time, time string(GMT-4)<br/>   `pingRate` not in use<br>   `deviceCondition`: device condition，1--device is uploading data，0/null--device is not uploading data within "5*data frequency"<br/>    `description` some description infomation<br>    `channel` device channel for Anylink SE <br>    `channelName` device channel name for Anylink SE<br>    `isActive` not in use<br>`protocol` not in use<br>`userGroupName` not in use<br>`userGroupId` not in use<br>`version`: agent version<br/>`vpnVersion`: vpn version supported in the agent<br/>`deviceModel`: <br/>      `id: `device model ID<br/>      `name`: device model name<br>      `alias`:  device model alias<br>      `manufacturer`: not in use<br>      `description`: some description infomation |
 
 
 
@@ -1346,6 +1356,7 @@ Function: Get device list
             "id": 1441802239,
             "name": "Kallyope-014-system",
             "serialNumber": "1408009",
+            "externalId":"93efdf62-96bf-4e15-948f-449ab7946a56",
             "deviceAttributes": null,
             "lastContact": "2020-09-25 17:50:00.0",
             "lastRegister": "2020-09-25 17:26:59.632027",
