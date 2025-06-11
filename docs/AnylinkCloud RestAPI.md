@@ -2281,7 +2281,7 @@ Parameters: Append URL
 | Parameters   | Type    | Required | Comment                   |
 | ------------ | ------- | -------- | ------------------------- |
 | token        | String  | Yes      | System admin token.       |
-| tenantEName  | Integer | Yes      | Tenant name               |
+| tenantEName  | String | Yes      | Tenant name               |
 
 Response JSON:
 
