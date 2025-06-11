@@ -34,7 +34,7 @@
 
   - `rule.id` must be unique within the `device` scope.
 
-  - `rule.name ` Alarm rule name
+  - `rule.name` Alarm rule name
 
   - `trigger`
 
@@ -46,7 +46,7 @@
 
   - `di` 
 
-    - `dep` depend relation, used to group items,  group item rule may be need a key item.
+    - `dep` depend relation, used to group items,  group item rules may be need a key item.
 
     - `id` index
 
@@ -75,7 +75,7 @@
 
     - `name` action name
     - `type` action type, 1->send alarm
-    - `alarm` alram name
+    - `alarm` alarm name
     - `severity` alarm severity, currently supports `8, 9, 10, 11, 12`, which correspond to `Level 1, Level 2, Level 3, Level 4, Notification` on the page respectively.
     - `descr` alarm description. The suffix `$0` indicates that the alarm timestamp and current data value will be automatically appended when uploading the alarm description
 
