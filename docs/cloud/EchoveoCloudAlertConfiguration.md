@@ -69,6 +69,8 @@ After modifying or adding an alarm rule, click the **Save** button in the upper-
 
 # 3. Configure alarm rules in ModuleConfig.xml
 
+## XML configuration file description
+
 In addition to configuring alarm rules on the web page, you can also manually modify the XML configuration file. But this requires combining RestAPI to deploy the XML configuration file into the box.
 
 Here we first introduce the formats related to alarm rules in XML.
@@ -152,4 +154,7 @@ Here we first introduce the formats related to alarm rules in XML.
     - `severity` alarm severity, currently supports `8, 9, 10, 11, 12`, which correspond to `Level 1, Level 2, Level 3, Level 4, Notification` on the page respectively.
     - `descr` alarm description. The suffix `$0` indicates that the alarm timestamp and current data value will be automatically appended when uploading the alarm description
 
-     
+## Deploy configuration files to the box through RestfulAPI
+Reference Python script file: https://github.com/echoveo/NeuroQ/blob/main/docs/cloud/deployConfig-RestfulAPI.py
+Sample XML configuration file: https://github.com/echoveo/NeuroQ/blob/main/docs/cloud/1801702.xml
+
