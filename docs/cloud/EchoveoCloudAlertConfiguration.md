@@ -1,4 +1,77 @@
-# 1. Configure alarm rules in ModuleConfig.xml
+# 1. Set up alarm rules in CloudWeb
+
+  **Settings -> Gateway Management -> Remote Manage**
+
+  - Click **Upload Gateway Configuration** – this forces the gateway to upload its current config file.
+
+  - Next, navigate to **Open Saved Configuration**
+
+   ![1749554342664](https://github.com/user-attachments/assets/3fd6541b-a297-4646-9da5-51ec29b68417)
+
+![1749553854410](https://github.com/user-attachments/assets/2d07167d-e062-4c22-b77f-638a948783b1)
+
+
+
+![1749554221735](https://github.com/user-attachments/assets/1d138624-6dde-4b87-a87c-7759d8d2b1e0)
+
+
+
+In the **Alarms** tab, you can modify existing alarm rules or create new ones.
+
+After modifying or adding an alarm rule, click the **Save** button in the upper-right corner of the page. Note that this only saves the configuration on the server side. You must then click **Deploy** to push the configuration to the edge device.
+
+
+
+
+  # 2. View alarms in CloudWeb
+
+  ## Alarm rules
+
+  ![image-20250430103727595](https://github.com/user-attachments/assets/345cea9d-f473-4fa9-961c-e58267b6abcf)
+
+
+  ![image-20250430103928448](https://github.com/user-attachments/assets/70110a37-17ae-4a40-b2d6-35c03bb789ee)
+
+
+  ## Current Alarms
+
+  ![image-20250430104131997](https://github.com/user-attachments/assets/a1c93161-b6bc-4300-99bf-825ad1f2ffcb)
+
+
+  ## Historical alarms
+
+  ![image-20250430104233774](https://github.com/user-attachments/assets/6b7e0a11-aada-4834-88c2-0f3185b053ec)
+
+
+
+  ## Configure email notification for alarms
+
+  1. Set user's email address
+
+     ![image-20250430104716281](https://github.com/user-attachments/assets/113fcb0f-0ca1-437f-a040-adecc0fd5e1f)
+
+
+  2. Bind devices to users, so they only receive alarm notifications from their bound devices.
+
+     **Access Control -> Device Access Control**
+
+     ![image-20250430104827304](https://github.com/user-attachments/assets/4f21708c-5d92-4aea-a065-58c19bb94a91)
+
+      ![image-20250430104940441](https://github.com/user-attachments/assets/6c020a43-1656-4a2b-be06-915c7dc09b64)
+
+ - Select the target user from the left panel
+
+ - Check the corresponding device checkbox
+
+ - Click the icon on the right side
+
+
+
+# 3. Configure alarm rules in ModuleConfig.xml
+
+In addition to configuring alarm rules on the web page, you can also manually modify the XML configuration file. But this requires combining RestAPI to deploy the XML configuration file into the box.
+
+Here we first introduce the formats related to alarm rules in XML.
 
 ```xml
 <model n="CO2" id="2" d="IDrv.Custom:libDModbus" config="rtu;/dev/ttyUSB0;9600;None;8;1;STANDARD;2000;100;20" devicedriver="Modbus-RTU">
@@ -41,7 +114,7 @@
     - `trigger.relation` relations between `<di>` tags, has `&, |, (, )`  
       1,2,3... -> `di.id`  
       The `&` character should be represented as `&` in XML generation.  
-      
+
     - Set `trigger.type` to a fixed value of 1, indicating a date item trigger.
 
   - `di` 
@@ -78,76 +151,5 @@
     - `alarm` alarm name
     - `severity` alarm severity, currently supports `8, 9, 10, 11, 12`, which correspond to `Level 1, Level 2, Level 3, Level 4, Notification` on the page respectively.
     - `descr` alarm description. The suffix `$0` indicates that the alarm timestamp and current data value will be automatically appended when uploading the alarm description
-
-  
-
-  # 2. Set up alarm rules in CloudWeb
-
-  **Settings -> Gateway Management -> Remote Manage**
-
-  - Click **Upload Gateway Configuration** – this forces the gateway to upload its current config file.
-
-  - Next, navigate to **Open Saved Configuration**
-
-   ![1749554342664](https://github.com/user-attachments/assets/3fd6541b-a297-4646-9da5-51ec29b68417)
-
-
-    ![1749553854410](https://github.com/user-attachments/assets/2d07167d-e062-4c22-b77f-638a948783b1)
-
-
-    In the **Alarms** tab, you can modify existing alarm rules or create new ones.
-
-    After modifying or adding an alarm rule, click the **Save** button in the upper-right corner of the page. Note that this only saves the configuration on the server side. You must then click **Deploy** to push the configuration to the edge device.
-
-    ![1749554221735](https://github.com/user-attachments/assets/1d138624-6dde-4b87-a87c-7759d8d2b1e0)
-
-
-  
-
-  
-
-  # 3. View alarms in CloudWeb
-
-  ## Alarm rules
-
-  ![image-20250430103727595](https://github.com/user-attachments/assets/345cea9d-f473-4fa9-961c-e58267b6abcf)
-
-
-  ![image-20250430103928448](https://github.com/user-attachments/assets/70110a37-17ae-4a40-b2d6-35c03bb789ee)
-
-
-  ## Current Alarms
-
-  ![image-20250430104131997](https://github.com/user-attachments/assets/a1c93161-b6bc-4300-99bf-825ad1f2ffcb)
-
-
-  ## Historical alarms
-
-  ![image-20250430104233774](https://github.com/user-attachments/assets/6b7e0a11-aada-4834-88c2-0f3185b053ec)
-
-
-  
-  ## Configure email notification for alarms
-
-  1. Set user's email address
-
-     ![image-20250430104716281](https://github.com/user-attachments/assets/113fcb0f-0ca1-437f-a040-adecc0fd5e1f)
-
-
-  2. Bind devices to users, so they only receive alarm notifications from their bound devices.
-
-     **Access Control -> Device Access Control**
-
-     ![image-20250430104827304](https://github.com/user-attachments/assets/4f21708c-5d92-4aea-a065-58c19bb94a91)
-
-
-     - Select the target user from the left panel
-
-     - Check the corresponding device checkbox
-
-     - Click the icon on the right side
-
-     ![image-20250430104940441](https://github.com/user-attachments/assets/6c020a43-1656-4a2b-be06-915c7dc09b64)
-
 
      
