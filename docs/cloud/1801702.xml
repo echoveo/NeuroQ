@@ -1,0 +1,88 @@
+<agent externalid="" firmware="3.8.14" flag="SET-TASKS" id="1801702" md5="86893892B86535B7F0542A68F6315D0D" model="NeuroQ" n="PCA agent" port="-1" script="1.0.8" sdmwebs="3.8.12" sign="cSj3lpijQeuYCJrmDsoKJuoeZFd0NSDpNTycQvLmGPbMnBjD3oohcOagEjI8npMJo7/85y3QIV9bprVIdOJpEvY1mA/Rwp9fFfr7fmI2SfDySrXKRWX3Dli9F7z/JzjF83Ea7dr4GnmLj/afkJ/RcB5IckOv4au23xAvHY6+Mlg=" timezone="UTC" ts="1749391917960" uuid="89ef4462-4472-11f0-b3d4-ee7c614ef955" version="3.8.3" vpn="2.0.3">
+  <model n="ra-model">
+    <device id="1023" ip="127.0.0.1" n="ra-device">
+      <driver config="1" n="T.IDrv.Task:libtremoteplc">
+        <commDataItems>
+          <dataItem addr="" config="" freq="3600000" id="2" n="NET-TYPE" report="1" rw="0" type="s" vtype=""/>
+          <dataItem addr="" config="" freq="3600000" id="3" n="WAN-IP" report="1" rw="0" type="s" vtype=""/>
+          <dataItem addr="" config="" freq="3600000" id="4" n="WAN-MAC" report="1" rw="0" type="s" vtype=""/>
+          <dataItem addr="" config="" freq="3600000" id="5" n="WIFI-LIST" report="1" rw="0" type="s" vtype=""/>
+          <dataItem addr="" config="" freq="3600000" id="6" n="WIFI-IP" report="1" rw="0" type="s" vtype=""/>
+          <dataItem addr="" config="" freq="3600000" id="7" n="WIFI-MAC" report="1" rw="0" type="s" vtype=""/>
+          <dataItem addr="" config="" freq="3600000" id="8" n="WIFI-SSID" report="1" rw="0" type="s" vtype=""/>
+          <dataItem addr="" config="" freq="3600000" id="9" n="WIFI-STRONG" report="1" rw="0" type="s" vtype=""/>
+          <dataItem addr="" config="" freq="3600000" id="10" n="WIFI-DHCP" report="1" rw="0" type="s" vtype=""/>
+          <dataItem addr="" config="" freq="3600000" id="11" n="UPTIME" report="1" rw="0" type="s" vtype=""/>
+          <dataItem addr="" config="" freq="3600000" id="12" n="WIFI-BSSID" report="1" rw="0" type="s" vtype=""/>
+          <dataItem addr="" config="" freq="3600000" id="13" n="USB-DEVS" report="1" rw="0" type="s" vtype=""/>
+          <dataItem addr="" config="" freq="3600000" id="18" n="MEMORY" report="1" rw="0" type="s" vtype=""/>
+          <dataItem addr="" config="" freq="3600000" id="19" n="STORAGE" report="1" rw="0" type="s" vtype=""/>
+          <dataItem addr="" config="" freq="3600000" id="22" n="WIFI-TYPE" report="1" rw="0" type="s" vtype=""/>
+          <dataItem addr="" config="" freq="3600000" id="23" n="WIFI-HIDDEN" report="1" rw="0" type="s" vtype=""/>
+        </commDataItems>
+      </driver>
+    </device>
+  </model>
+  <task>
+    <TaskDriver>
+      <driver config="10001" n="T.IDrv.Task:libcontrol"/>
+    </TaskDriver>
+    <TaskDriver>
+      <driver config="1" n="T.IDrv.Task:libtremoteplc"/>
+    </TaskDriver>
+    <TaskDriver>
+      <driver config="NULL;115200;8;N;1;0;1;0;0;localhost;10001;6;60;1;10000;3" n="T.IDrv.Task:libzigbee"/>
+    </TaskDriver>
+    <TaskDriver>
+      <driver config="tetra.anylink.io;8883;tetra.anylink.io;8883;60;2;0;1;;;;1;" n="T.IDrv.Task:libkmqtt"/>
+    </TaskDriver>
+    <TaskDriver>
+      <driver n="T.IDrv.Task:libTCmd" config="1D39DDF151E8BDF66E5C199DD22B6076" id="1"/>
+    </TaskDriver>
+    <TaskDriver>
+      <driver config="test" id="1" n="T.IDrv.Task:libTUsbtenki"/>
+    </TaskDriver>
+  </task>
+  <model n="CO2" id="1" d="IDrv.Custom:libDModbus" config="rtu;/dev/ttyUSB0;9600;None;8;1;STANDARD;2000;100;20" devicedriver="Modbus-RTU"> 
+    <device n="CO2" id="1" ip="192.168.1.1" type="test"> 
+      <driver n="IDrv.Custom:libDModbus" config="rtu;/dev/ttyUSB0;9600;None;8;1;STANDARD;2000;100;20" id="1"> 
+        <commDataItems> 
+          <dataItem id="1" n="CO2" alias="CO2-in-PPM" config="254;4;3;1;WORD;0;0;0" type="a" rw="0" freq="3000" report="1"/> 
+        </commDataItems> 
+      </driver>  
+      <Rules> 
+        <rule id="1" name="CO2"> 
+          <Triggers> 
+            <trigger name="CO2" relation="0" type="1"> 
+              <di dep="" id="0" name="CO2" opd="60000" opr="10"/> 
+            </trigger> 
+          </Triggers>  
+          <Actions> 
+            <action alarm="CO2PPM" ctrl_item="" ctrl_switch="0" ctrl_value="" descr="CO2PPM ,$0" name="CO2" severity="8" type="1"/> 
+          </Actions> 
+        </rule> 
+      </Rules> 
+    </device> 
+  </model>  
+  <model n="task" id="2" config="test" d="T.IDrv.Task:libTUsbtenki"> 
+    <device n="temperature" id="2" ip="192.168.1.1" type="test"> 
+      <driver n="T.IDrv.Task:libTUsbtenki" config="" id="1"> 
+        <commDataItems> 
+          <dataItem id="1" n="temp" alias="temperature" config="0" type="a" rw="1" freq="10000" report="1"/> 
+        </commDataItems> 
+      </driver>  
+      <Rules> 
+        <rule id="1" name="temperature"> 
+          <Triggers> 
+            <trigger name="temp" relation="0" type="1"> 
+              <di dep="" id="0" name="temp" opd="-5" opr="10"/> 
+            </trigger> 
+          </Triggers>  
+          <Actions> 
+            <action alarm="temperature" ctrl_item="" ctrl_switch="0" ctrl_value="" descr="temperature ,$0" name="temp" severity="8" type="1"/> 
+          </Actions> 
+        </rule> 
+      </Rules> 
+    </device> 
+  </model> 
+</agent>
