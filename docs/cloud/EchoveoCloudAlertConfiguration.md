@@ -155,6 +155,17 @@ Here we first introduce the formats related to alarm rules in XML.
     - `descr` alarm description. The suffix `$0` indicates that the alarm timestamp and current data value will be automatically appended when uploading the alarm description
 
 ## Deploy configuration files to the box through RestfulAPI
-Reference Python script file: https://github.com/echoveo/NeuroQ/blob/main/docs/cloud/deployConfig-RestfulAPI.py
-Sample XML configuration file: https://github.com/echoveo/NeuroQ/blob/main/docs/cloud/1801702.xml
+- Reference Python script file: https://github.com/echoveo/NeuroQ/blob/main/docs/cloud/deployConfig-RestfulAPI.py
+
+  In this script, you need to set the values of the following parameters:
+
+  ```properties
+  TENANT_ENAME = "nvisualai"
+  USERNAME = "admin"
+  PASSWORD = ""
+  SERIAL_NUMBER = 1801702
+  CONFIG_FILE_PATH = "D:\\1801702.xml"
+  ```
+
+- Sample XML configuration file: https://github.com/echoveo/NeuroQ/blob/main/docs/cloud/1801702.xml
 

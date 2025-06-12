@@ -75,9 +75,9 @@ from typing import Optional, Dict, Any
 # Parameters
 TENANT_ENAME = "nvisualai"
 USERNAME = "admin"
-PASSWORD = "ycoBxFMtEPp@20"
+PASSWORD = ""
 SERIAL_NUMBER = 1801702
-CONFIG_FILE_PATH = "C:\\Users\\AnyLink\\Desktop\\1801702.xml"
+CONFIG_FILE_PATH = "D:\\1801702.xml"
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
